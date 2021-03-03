@@ -34,3 +34,4 @@ height | 이미지의 높이 지정
 <br>
 
 --- page 84부터 다시 ... ---
+cf. https://www.youtube.com/watch?v=eh2T8QO_bkA&list=PLBXuLgInP-5kgzJZRGhpHZINPu-K90jbM&index=5
