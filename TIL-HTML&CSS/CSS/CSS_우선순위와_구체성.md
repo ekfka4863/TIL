@@ -1,3 +1,6 @@
+---
+date: 2021-03-05-금
+---
 # CSS 우선순위와 구체성
 
 - CSS에서 우선순위란?
@@ -140,3 +143,6 @@ https://www.w3schools.com/cssref/css_selectors.asp
 10점
 1점
 ```
+
+---
+date: 2021-03-05-금

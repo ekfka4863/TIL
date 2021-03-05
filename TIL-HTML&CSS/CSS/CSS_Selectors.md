@@ -1,3 +1,6 @@
+---
+date: 2021-03-04-목
+---
 선택자 
 =====
 
@@ -191,3 +194,4 @@ cf.
 - https://www.codingfactory.net/10792
 - https://bearjin90.tistory.com/4
 - http://blog.hivelab.co.kr/공유before와after-그들의-정체는/
+

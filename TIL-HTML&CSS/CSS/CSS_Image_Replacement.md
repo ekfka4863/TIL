@@ -1,4 +1,7 @@
-Image Replacement 
+---
+date: 2021-03-03-수
+---
+Image Replacement  (미완)
 =====
 
 > IR 기법을 사용해야하는 이유? 
@@ -105,3 +108,4 @@ Image Replacement
 
 cf. 
 - https://css-tricks.com/snippets/css/standard-css-image-replacement/
+
