@@ -92,7 +92,8 @@
 ![CSS 구체성 수치에 따른 CSS의 적용 순위](./images/example_6.png)
 
 위의 예시에서는 `!important`가 적용된 선언 방식이 다른 모든 방식보다 우선시 돼서 `Hello there!`에 `{color: purple; }`이 먼저 적용된 것을 확인할 수 있다. 
----
+
+<hr>
 
 > 퀴즈 
 
