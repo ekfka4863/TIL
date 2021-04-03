@@ -1,4 +1,8 @@
-> TIL(20210302) - 웹표준과 웹접근성  
+---
+date: 2021-03-02-Tuesday
+---
+
+# 웹표준과 웹접근성  
 
 - 두 단어는 사실 한단어? 
 - 웹표준과 웹접근성은 거의 하나의 단어라고 봐도 무방할 정도로 뗄레야 뗄 수 없는 단어라고 한다. 
@@ -7,7 +11,7 @@
 오늘은 이 웹표준과 웹접근성이라는 두 가지 개념에 대해 자세히 알아보자! 
 ---
 
->> 웹표준 (Web Standards)
+> 웹표준 (Web Standards)
 
 - 웹표준이란 웹에서 표준적으로 사용되는 기술이나 규칙을 의미한다. 
 - 우리가 '표준(standard)'라는 표현을 사용하긴 하지만 웹표준이라는 것은 사실 웹표준화 단체인 W3C(World Wide Consortium)의 토론을 통해 나온 권고안(recommendtion)을 의미한다. W3C가 권고한 표준안은 웹사이트를 작성할 때 이용하는 HTML, CSS, JavaScript 등에 대한 규정을 담고 있는데, 웹표준의 궁극적인 목적은 웹사이트에 접속한 사용자가 어떤 브라우저를 사용하든 그 운영체제나 브라우저의 종류 및 버전에 영향을 안 받고 호환이 가능하여 어떤 브라우저에서도 동일한 결과물을 받아볼 수 있게 하는 것이다. 
@@ -23,7 +27,7 @@
 
 ---
 
->> 웹접근성 (Web Accessibility)
+> 웹접근성 (Web Accessibility)
 
 - 마우스를 사용할 수 있든 없든, 앞이 보이든 안보이든, 이런 신체적인 다름에 상관없이 웹은 모두에게 동등하게 정보에 대한 접근성을 제공해야 한다. 
 - 또한 웹은 사용자가 어떠한 환경에서 정보에 접근을 시도하든 동일한 정보를 제공해야 한다. 
@@ -31,10 +35,11 @@
 - 단, 웹 표준을 준수 하는 것만으로도 자연스럽게 웹 접근성이 향상될 수도 있다
 
 
+<hr>
 
+- cf. 
+  - https://m.blog.naver.com/jhc9639/221032508913
+  - http://www.smartebiz.kr/new/subpage02_02.html
+  - https://seulbinim.github.io/WSA/standards.html#웹표준의-장점
 
-cf. 
-https://m.blog.naver.com/jhc9639/221032508913
-http://www.smartebiz.kr/new/subpage02_02.html
-https://seulbinim.github.io/WSA/standards.html#웹표준의-장점
-
+<hr>
