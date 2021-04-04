@@ -1,5 +1,5 @@
 ---
-date: 2021=04-02-Friday
+date: 2021-04-02-Friday
 ---
 
 # \<head>\</head> 안에서 사용하는 태그들
@@ -7,7 +7,7 @@ date: 2021=04-02-Friday
 
 > `<head></head>` 안에서 사용하는 태그들
 
-<div style="padding-left: 30px;">
+<div style="padding-left: 35px;">
 	<h3>목록</h3>
 	<ol type="1"> 
 		<li>title (웹 페이지의 제목)</li>
@@ -110,7 +110,8 @@ https://m.blog.naver.com/PostView.nhn?blogId=shinekjm&logNo=221261775607&proxyRe
 		- \<link rel="stylesheet">가 가장 기본적인데 해석하면 스타일 시트로써 이 문서를 불러오겠단 말이다.
 		이 밖에도 다양한 속성이 있다:
 
-			![<link> 태그의 속성 중 rel의 속성들 설명](./images/rel속성들.png)
+			<img src="./images/rel속성들.png" alt="<link> 태그의 속성 중 rel의 속성들 설명" width="500px" height="auto" />
+
 
 	- `type 속성`
 		- type은 연결 문서의 유형을 나타낸다
