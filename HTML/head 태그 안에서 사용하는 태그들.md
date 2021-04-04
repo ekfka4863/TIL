@@ -144,6 +144,7 @@ date: 2021-04-02-Friday
 			<!-- xml 파일일 경우  -->
 			<link type="application/txml" />
 		```
+
 			📍 주로 이렇게 3가지 속성이 많이 사용된다. 더 알고 싶다면:
 			 	  cf. https://www.sitepoint.com/mime-types-complete-list/
 
@@ -155,34 +156,34 @@ date: 2021-04-02-Friday
 		- e.g.
 		```html
 			<!-- 1. 상대 경로 -->
-				같은 폴더의 다른 페이지 이동하기
-				<link href ="./ex04.htm" /> 
-				같은 폴더의 다른 페이지 이동하기
-				<link href ="ex04.htm" />
-				자식 폴더의 다른 페이지 이동하기 
-				<link href ="./Member/list.htm" />
-				자식 폴더의 다른 페이지 이동하기 
-				<link href ="Member/list.htm" />
-				자식 폴더의 다른 페이지 이동하기 
-				<link href ="./Member/private/private.htm" />
-				자식 폴더의 다른 페이지 이동하기 
-				<link href ="Member/private/private.htm" />
-				프로젝트 루트 폴더의 자원으로 이동
-				<link href ="../필기.txt" />
+			같은 폴더의 다른 페이지 이동하기
+			<link href ="./ex04.htm" /> 
+			같은 폴더의 다른 페이지 이동하기
+			<link href ="ex04.htm" />
+			자식 폴더의 다른 페이지 이동하기 
+			<link href ="./Member/list.htm" />
+			자식 폴더의 다른 페이지 이동하기 
+			<link href ="Member/list.htm" />
+			자식 폴더의 다른 페이지 이동하기 
+			<link href ="./Member/private/private.htm" />
+			자식 폴더의 다른 페이지 이동하기 
+			<link href ="Member/private/private.htm" />
+			프로젝트 루트 폴더의 자원으로 이동
+			<link href ="../필기.txt" />
 				
 			<!-- 2. 절대 경로 -->
-				절대경로
-				<link href ="/WebClientTest/ex01.htm" />
-				절대경로
-				<link href ="/WebClientTest/Member/list.htm" />
-				절대경로
-				<link href ="/WebClientTest/Member/private/private.htm" />
-				부모폴더의 다른 페이지 이동하기
-				<link href ="/WebClientTest/Member/list.htm" />
+			절대경로
+			<link href ="/WebClientTest/ex01.htm" />
+			절대경로
+			<link href ="/WebClientTest/Member/list.htm" />
+			절대경로
+			<link href ="/WebClientTest/Member/private/private.htm" />
+			부모폴더의 다른 페이지 이동하기
+			<link href ="/WebClientTest/Member/list.htm" />
 
 			<!-- cf. 
-				https://sas-study.tistory.com/127 
-				https://soharu.tistory.com/11 
+			https://sas-study.tistory.com/127 
+			https://soharu.tistory.com/11 
 			-->
 		```
 
@@ -243,25 +244,25 @@ date: 2021-04-02-Friday
 	2. 스크립트 파일을 만든 후 불러오기   
 	- e.g.
 	```html
-		<html>
-			<head>
-				<!-- 1. HTML 문서 안에 <script> 태그를 만들고, 그 안에 코드를 넣는 반법이다.
-					이 방법은 JavaScript 코드가 짧은 경우에 유용하다. -->
-				<script>
-					document.getElementById("#paragraph").innerHTML = "Nice to meet you!"
-				</script>
-			</head>
+	<html>
+		<head>
+			<!-- 1. HTML 문서 안에 <script> 태그를 만들고, 그 안에 코드를 넣는 반법이다.
+				이 방법은 JavaScript 코드가 짧은 경우에 유용하다. -->
+			<script>
+				document.getElementById("#paragraph").innerHTML = "Nice to meet you!"
+			</script>
+		</head>
 
-			<body>
-				<h1>EXAMPLE</h1>
-				<p id="paragraph">Hello there : ) </p>
+		<body>
+			<h1>EXAMPLE</h1>
+			<p id="paragraph">Hello there : ) </p>
 
-				<!-- 2. JavaScript 코드를 담은 파일을 만든 후 HTML 문서에 연결시키는 방법이다. 자바스크립트 코드를 담은 파일의 확장자는 .js이며, src라는 속성을 사용하여 해당 HTML 문서와 연결시킨다. 이 방법은 많은 HTML 문서에 같은 자바스크립트 코드를 적용시키거나, 자바스크립트 코드가 긴 경우 유용한 방법이다.
-				cf. HTML 문서에서 script의 위치는 매우 중요하다. 스크립트가 로딩되고 실행되어야 하는 시점을 잘 파악하여 적절한 위치에 사용해야하는데, 이는 뒤에서 좀 더 살펴볼 예정... 
-				지금은 <script> 태그가 위에서 처럼 <head> 안에 있을 수도 있지만 이렇게 위치할 수도 있다는 것을 보여주기 위해 이렇게 적은 것! -->
-				<script src="EXAMPLE.js"></script>
-			</body>	
-		</html>
+			<!-- 2. JavaScript 코드를 담은 파일을 만든 후 HTML 문서에 연결시키는 방법이다. 자바스크립트 코드를 담은 파일의 확장자는 .js이며, src라는 속성을 사용하여 해당 HTML 문서와 연결시킨다. 이 방법은 많은 HTML 문서에 같은 자바스크립트 코드를 적용시키거나, 자바스크립트 코드가 긴 경우 유용한 방법이다.
+			cf. HTML 문서에서 script의 위치는 매우 중요하다. 스크립트가 로딩되고 실행되어야 하는 시점을 잘 파악하여 적절한 위치에 사용해야하는데, 이는 뒤에서 좀 더 살펴볼 예정... 
+			지금은 <script> 태그가 위에서 처럼 <head> 안에 있을 수도 있지만 이렇게 위치할 수도 있다는 것을 보여주기 위해 이렇게 적은 것! -->
+			<script src="EXAMPLE.js"></script>
+		</body>	
+	</html>
 	``` 
 
 - `<script> 태그의 속성`들은 아래와 같다:
