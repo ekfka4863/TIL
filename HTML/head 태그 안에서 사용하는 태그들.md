@@ -143,7 +143,7 @@ date: 2021-04-02-Friday
 			
 			<!-- xml 파일일 경우  -->
 			<link type="application/txml" />
-		```
+		```  
 
 			📍 주로 이렇게 3가지 속성이 많이 사용된다. 더 알고 싶다면:
 			 	  cf. https://www.sitepoint.com/mime-types-complete-list/
@@ -278,6 +278,11 @@ date: 2021-04-02-Friday
 	|<u>type</u>|__||``|
 
 
+
+https://kimlog.me/js/2019-10-05-script/
+http://tcpschool.com/html-tag-attrs/script-async
+https://www.w3schools.com/tags/tag_script.asp
+https://www.w3schools.com/tags/att_script_async.asp
 
 < 미완 >
 
