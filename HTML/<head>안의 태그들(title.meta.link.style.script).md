@@ -304,22 +304,53 @@ date: 2021-04-02-Friday - 2021-04-05-Monday
 
 	📍 따라서 위와 같은 상황을 막기 위해 script 태그는 body 태그 최하단에 위치하는 게 가장 좋다! 
 - 하지만 항상  \<script> 태그를 \<body> 태그 최하단에 놓을 수 있는 상황이 아닐 수도 있다.  \<script> 태그가 HTML 요소들 사이에 위치할 때,  \<script> 태그의 속성을 활용해서 로딩 순서를 제어할 수가 있다. <br> 
-이럴 때 사용할 수 있는  \<script> 태그의 속성은 2 가지:
-	- `async 속성`  
-<img src="./images/async속성.png" alt="async 속성으로 script 로딩 순서 제어하기" width="350px" />  
-		- 위의 그림에서 처럼 async 속성이 더해진 script 태그가 HTML 태그 사이에 있는 경우, <u>브라우저가 script 태그를 만나도 HTML parsing이 중단되지 않는다.</u> 
-		- script 로드와 HTML parsing이 함께 이뤄지다가 script 로드가 끝나면 script가 실행되는 시점에 HTML parsing이 잠시 중단되고 실행이 끝나면 HTML parsing이 재개된다. <br> <br> 
-		 
-	- `defer 속성`  
-<img src="./images/defer속성.png" alt="defer 속성으로 script 로딩 순서 제어하기" width="350px" />
-		- 위의 그림에서 처럼 defer 속성이 더해진 script 태그가 HTML 태그 사이에 있는 경우, <u>브라우저가 script 태그를 만나도 script 로드의 시작부터 끝까지 HTML parsing이 중단되지 않으며ㅡ HTML parsing이 끝나고 난 뒤에야 script가 실행된다. </u> 
-- ~~주가적으로 script 내부에서 로딩 순서를 제어할 수도 있는데, 이때 사용되는 아이들은 아래와 같다:~~
+이럴 때 사용할 수 있는  \<script> 태그의 속성은 2 가지:  
+<div style="padding-left: 25px;">
+	<ul type="circle">
+	  <li> 📌 `async 속성` </li>
+	  <img src="./images/async속성.png" alt="async 속성으로 script 로딩 순서 제어하기" width="450px" />  
+		<ul type="square">
+			<li>위의 그림에서 처럼 async 속성이 더해진 script 태그가 HTML 태그 사이에 있는 경우, <u>브라우저가 script 태그를 만나도 HTML parsing이 중단되지 않는다.</u></li>
+			<li>script 로드와 HTML parsing이 함께 이뤄지다가 script 로드가 끝나면 script가 실행되는 시점에 HTML parsing이 잠시 중단되고 실행이 끝나면 HTML parsing이 재개된다.</li>
+		</ul>
+	</ul>
+	<br>
+	<ul type="circle">
+	  <li> 📌 `defer 속성` </li> 
+    <img src="./images/defer속성.png" alt="defer 속성으로 script 로딩 순서 제어하기" width="450px" />
+		<ul type="square">
+		  <li>위의 그림에서 처럼 defer 속성이 더해진 script 태그가 HTML 태그 사이에 있는 경우, <u>브라우저가 script 태그를 만나도 script 로드의 시작부터 끝까지 HTML parsing이 중단되지 않으며ㅡ HTML parsing이 끝나고 난 뒤에야 script가 실행된다.</u>
+			</li> 
+		</ul>
+	</ul>	
+</div>
+
+<div>
+	<ul>
+	<del>
+		<li>주가적으로 script 내부에서 로딩 순서를 제어할 수도 있는데, 이때 사용되는 아이들은 아래와 같다:   
+			<ul>
+				<li>DOMContentLoaded</li>
+				<li>onload</li>		
+			</ul>
+		이에 관련해서는 JS를 배울 때 더 다뤄보도록 합시다!  
+		</li>
+		<br>
+		<ul>
+			<li>
+			cf. <a href="https://velog.io/@takeknowledge/script-%ED%83%9C%EA%B7%B8%EB%8A%94-%EC%96%B4%EB%94%94%EC%97%90-%EC%9C%84%EC%B9%98%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C%EC%9A%94" > <br> 참고 사이트</a>
+			<!-- https://velog.io/@takeknowledge/script-%ED%83%9C%EA%B7%B8%EB%8A%94-%EC%96%B4%EB%94%94%EC%97%90-%EC%9C%84%EC%B9%98%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C%EC%9A%94 -->
+			</li>
+		</ul>
+	</del>
+	</ul>
+</div>
+
+<!-- - ~~주가적으로 script 내부에서 로딩 순서를 제어할 수도 있는데, 이때 사용되는 아이들은 아래와 같다:~~
 	- ~~`DOMContentLoaded`~~ 
 	- ~~`onload`~~  
 ~~이에 관련해서는 JS를 배울 때 더 다뤄보도록 합시다!~~   
-~~cf. https://velog.io/@takeknowledge/script-%ED%83%9C%EA%B7%B8%EB%8A%94-%EC%96%B4%EB%94%94%EC%97%90-%EC%9C%84%EC%B9%98%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C%EC%9A%94~~
-
-
+~~cf. https://velog.io/@takeknowledge/script-%ED%83%9C%EA%B7%B8%EB%8A%94-%EC%96%B4%EB%94%94%EC%97%90-%EC%9C%84%EC%B9%98%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C%EC%9A%94~~ -->
 
 	
 <br>
