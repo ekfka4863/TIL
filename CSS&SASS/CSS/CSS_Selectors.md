@@ -148,20 +148,23 @@ date: 2021-03-04-Thursday
                     <ul style="list-style-type: none;">
                         <li><details><summary>인접 형제 결합자/인접 동위 선택자(Adjacent Sibling Selector)</summary>
                             <ul>
-                                <li></li>
-                                <li> <br> 
+                                <li>영어로 adjacent는 인접한, 가까운 이란 의미다. 인접 동위 선택자는 해당 요소와 동위(sibling) 관계에 있으며, 해당 요소의 바로 뒤에 존재하는 특정 타입의 요소를 모두 선택한다. <br> 
+                                <del>말이 어려워서 그렇지 그냥 같은 부모를 가지는 형제 관계에 있는 요소 바로 뒤에 오는 요소에게만 스타일링을 적용하겠다는 의미이다. </del></li>
+                                <li>아래의 예제는 모든 div 태그와 동위 관계에 있는 요소 중에서 div 태그의 바로 뒤에 존재하는 p 태그를 모두 선택하는 예제다; <br> 
                                     <ul style="list-style-type: none;">
-                                        <li>e.g. div > p { 스타일; }</li>
+                                        <li>e.g. div + p { 스타일; }</li>
                                     </ul>
                                 </li>
                             </ul>
                         </details></li>
                         <li><details><summary>일반 형제 결합자/일반 동위 선택자(General Sibling Selector)</summary>
                             <ul>
-                                <li>일반 동위 선택자는 해당 요소와 동위 관계에 있으며</li>
-                                <li> <br> 
+                                <li>일반 동위 선택자는 해당 요소와 동위 관계에 있으며, 해당 요소보다 뒤에 존재하는 특정 타입의 요소를 모두 선택한다.
+                                <br> 일반 동위 선택자는 위에서 살펴본 인접 동위 선택자와 달리 '인접'해 있을 필요가 없다. 즉, 같은 부모를 갖는 형제 관계에 있는 두 요소 뒤에 오는 어떠한 요소이기만 하면 되지 바로 뒤에 올 필요는 없다는 얘기다. 
+                                </li>
+                                <li>아래의 예제는 모든 div 태그와 동위 관계에 있는 요소 중에서 div 태그보다 뒤에 존재하는 p 태그를 모두 선택하는 예제다; <br> 
                                     <ul style="list-style-type: none;">
-                                        <li>e.g. div > p { 스타일; }</li>
+                                        <li>e.g. div ~ p { 스타일; }</li>
                                     </ul>
                                 </li>
                             </ul>
@@ -188,6 +191,28 @@ date: 2021-03-04-Thursday
 <br>
 
 >> 가상 클래스 (📍tip: 콜론이 하나! `의사 클래스`라고도 한다.)
+- CSS에서 가상 클래서(pseudo-class)는 선택하고자 하는 HTML 요소의 특별한 '상태(status)'를 명시할 떄 사용한다.
+- 가상 클래스를 사용하려면 기본적으로는 아래와 같은 문법을 준수하면 된다;  
+```css 
+        선택자: 의사 클래스 이름 {
+            속성: 속성값; }
+```
+- 클래스(class)나 아이디(id)에도 가상 클래스를 사용할 수 있다.   
+이때는 위의 가상 클래스 기본 문법에서 선택자 자리에 클래스 이름 또는 아이디 이름을 넣어주면 된다.  
+```css 
+        선택자.클래스이름: 의사 클래스 이름 {
+            속성: 속성값; }
+
+        선택자#아이디이름: 의사 클래스 이름 {
+            속성: 속성값; }
+```
+
+<br>
+<br>
+
+<div style="border: 1px dashed lightgray; padding: 15px; margin-left : 10px;">
+ 
+<b>[동적 의사 클래스(Dynamic Pseudo-Classes)]</b>
 
 - `E:hover`  
 
@@ -210,22 +235,91 @@ date: 2021-03-04-Thursday
     :point_right: 
     포커스 가상 클래스 선택자는 대화형 콘텐츠 --input, img, tabindex와 같은-- 에서 사용 되는 셀렉터이다 
 
+- `E:link`
+
+    :point_right: 
+    사용자가 아직 한 번도 해당 링크를 통해서 연결된 페이지를 방문하지 않은 상태를 모두 선택함.
+
+- `E:visited`
+
+    :point_right: 
+    사용자가 한 번이라도 해당 링크를 통해서 연결된 페이지를 방문한 상태를 모두 선택함. 
+
+
+<b>[상태 의사 클래스(UI Element States Pseudo-Classes)]</b>
+
+- `E:checked`
+
+    :point_right:
+    체크된(checked) 상태의 input 요소를 모두 선택함.
+
+- `E:enabled`
+
+    :point_right:
+    사용할 수 있는 input 요소를 모두 선택함.
+
+- `E:disabled`
+
+    :point_right:
+    사용할 수 없는 input 요소를 모두 선택함.
+
+
+<b>[구조 의사 클래스(Structural Pseudo-Classes)]</b>
+
+- `E:first-child`
+
+    :point_right:
+    모든 자식(child) 요소 중에서 첫 번째에 위치하는 자식 요소를 모두 선택함.
+
+- `E:nth-child`
+
+    :point_right:
+    모든 자식 요소 중에서 앞에서부터 n번째에 위치하는 자식 요소를 모두 선택함.
+
+- `E:first-of-type`
+
+    :point_right:
+    모든 자식 요소 중에서 첫 번째로 등장하는 특정 요소를 모두 선택함.
+
+- `E:nth-of-type`
+
+    :point_right:
+    모든 자식 요소 중에서 n번째로 등장하는 특정 요소를 모두 선택함.
+
+
+
 - 이 외에도 기타 다양한 가상 클래스 선택자들이 있다. 
     
     - cf. 
 
         [링크1]: https://bearjin90.tistory.com/4 "참고 링크1로 이동합니다!"
         [링크2]: https://homzzang.com/b/css-284 "참고 링크2로 이동합니다!"
-        📍 [링크1], [링크2] 참고!! 
+        [링크3]: http://www.tcpschool.com/css/css_selector_pseudoClass "참고 링크3로 이동합니다!"
+        📍 [링크1], [링크2], [링크3] 참고!! 
+</div>
 
 <br>
 <br>
+
 
 >> 가상 요소 (📍tip: 콜론이 두개! `의사 요소`라고도 한다.)
 
-가상 요소 선택자라는 것은 가상 클래스 선택자와는 다르게 CSS를 통해서 HTML에 가상의 요소를 생성해서 제공을 할 수 있다. 대표적인 가상 요소 선택자들을 알아보자. 
+- 가상 요소 선택자라는 것은 가상 클래스 선택자와는 다르게 CSS를 통해서 HTML에 가상의 요소를 생성해서 제공을 할 수 있다. 
+- '의사 요소'라고도 불리는 가상 요소는 해당 HTML 요소의 특정 부분만을 선택할 때 사용한다. 
+- 가상 요소를 사용하려면 기본적으로는 아래와 같은 문법을 준수하면 된다;  
+```css 
+        선택자:: 의사 요소 이름 {
+            속성: 속성값; }
+```
+- <del>이때, CSS1과 CSS2에서는 의사 클래스와 의사 요소를 나타낼 때 하나의 콜론(:)으로 함께 표기했지만, CSS3에서는 의사 클래스의 표현과 의사 요소의 표현을 구분하기로 하여, CSS3에서는 의사 클래스는 하나의 콜론(:)을, 의사 요소에는 두 개의 콜론(::)을 사용하고 있다.</del>
+- 이제 대표적인 가상 요소 선택자들을 알아보자. 
 
 <br>
+<br>
+
+<div style="border: 1px dashed lightgray; padding: 15px; margin-left : 10px;">
+
+<b>[대표적인 CSS 가상 요소/의사 요소]</b>
 
 - `E::before:`
 
@@ -293,6 +387,7 @@ date: 2021-03-04-Thursday
     
     <img src="./images/example_2.png" alt="::placeholder 예시" width="450px" style="margin-left:30px;" />
     <!-- ![::placeholder 예시](./images/example_2.png) -->
+</div>
 
 ---
 ---
@@ -306,5 +401,8 @@ date: 2021-03-04-Thursday
     - http://blog.hivelab.co.kr/공유before와after-그들의-정체는/
     - https://wallel.com/css-속성-선택자-정리-css-attribute-selector/
     - https://www.nextree.co.kr/p8468/
+    - https://aboooks.tistory.com/270
+    - http://www.tcpschool.com/css/css_selector_sibling
+    - http://www.tcpschool.com/css/css_selector_pseudoElement
 
 </details>
