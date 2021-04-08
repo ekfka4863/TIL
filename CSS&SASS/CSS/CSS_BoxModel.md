@@ -12,7 +12,7 @@ date: 2021-04-08-Thursday
 	- `Content`: 텍스트나 이미지가 들어있는 박스의 실징적인 내용 부분이다.
 말로 하면 이해가 안되니 아래의 예시를 보자;
 <div style="padding-left: 80px;">
-	<img src="./images/CSS_BoxModel.png" alt="css 상자 모델 예시" width="450px" />
+	<img src="./images/CSS_BoxModel.png" alt="css 상자 모델 예시" width="400px" />
 </div>
 
 - 기본적으로 HTML 요소를 하나의 상자라고 보았을 때, 아래와 같이 각 박스 모델의 영역들에 스타일을 적용시킬 수 있다;
@@ -48,23 +48,23 @@ date: 2021-04-08-Thursday
 	
 - 사용 예시;
 ```css
-	p {
-		padding-top: 5px;
-		padding-right: 5px;
-		padding-bottom: 5px;
-		padding-left: 5px;
-	}
+p {
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+}
 ```
 - 패딩 축약 표현(padding shorthand);
 ```css
-	p {
-		/* 축약 표현을 사용할 때는 top, right, bottom, left 순으로 값을 적어주면 된다. 
-		단, 만약 4면의 값이 전부 똑같을 경우 그냥 한번만 값을 적어주면 된다.  */
-		padding: 5px;
-		/* 만약 top, bottom의 값이 같고, right, left에 적용시킬 값이 같다면 아래와 같이 작성할 수 있다. 
-		top, bottom에는 5px씩 패딩이 적용되고, right, left에는 10px씩 패딩이 적용된다는 의미다. */
-		padding: 5px 10px;
-	}
+p {
+	/* 축약 표현을 사용할 때는 top, right, bottom, left 순으로 값을 적어주면 된다. 
+	단, 만약 4면의 값이 전부 똑같을 경우 그냥 한번만 값을 적어주면 된다.  */
+	padding: 5px;
+	/* 만약 top, bottom의 값이 같고, right, left에 적용시킬 값이 같다면 아래와 같이 작성할 수 있다. 
+	top, bottom에는 5px씩 패딩이 적용되고, right, left에는 10px씩 패딩이 적용된다는 의미다. */
+	padding: 5px 10px;
+}
 ```
 
 <br>
@@ -86,83 +86,83 @@ border에 적용할 수 있는 속성과 속성값들은 아래와 같다;
 
 - 사용 예시; 
 ```html
-	<!-- border-style 속성 -->
-	<style>
-		.dotted {border-style: dotted;}
-		.dashed {border-style: dashed;}
-		.solid {border-style: solid;}
-		.double {border-style: double;}
-		.groove {border-style: groove;}
-		.ridge {border-style: ridge;}
-		.inset {border-style: inset;}
-		.outset {border-style: outset;}
-		.none {border-style: none;}
-		.hidden {border-style: hidden;}
-		.mix {border-style: solid dashed dotted double;}
-		/* cf. http://tcpschool.com/examples/tryit/tryhtml.php?filename=css_boxmodel_borders_01 */
-	</style>
+<!-- border-style 속성 -->
+<style>
+	.dotted {border-style: dotted;}
+	.dashed {border-style: dashed;}
+	.solid {border-style: solid;}
+	.double {border-style: double;}
+	.groove {border-style: groove;}
+	.ridge {border-style: ridge;}
+	.inset {border-style: inset;}
+	.outset {border-style: outset;}
+	.none {border-style: none;}
+	.hidden {border-style: hidden;}
+	.mix {border-style: solid dashed dotted double;}
+	/* cf. http://tcpschool.com/examples/tryit/tryhtml.php?filename=css_boxmodel_borders_01 */
+</style>
 
 
-	<!-- border-width 속성 -->
-	<style>
-		.dottedA { border-style: dotted; border-width: 2px; }
-		.dottedB { border-style: dotted; border-width: 5px; }
-		.dashedA { border-style: dashed; border-width: thin; }
-		.dashedB { border-style: dashed; border-width: thick; }
-		.doubleA { border-style: double; border-width: 5px; }
-		.doubleB { border-style: double; border-width: thick; }
-		.mix { border-style: solid; border-width: 1px 2px 10px thick; }
-	</style>
+<!-- border-width 속성 -->
+<style>
+	.dottedA { border-style: dotted; border-width: 2px; }
+	.dottedB { border-style: dotted; border-width: 5px; }
+	.dashedA { border-style: dashed; border-width: thin; }
+	.dashedB { border-style: dashed; border-width: thick; }
+	.doubleA { border-style: double; border-width: 5px; }
+	.doubleB { border-style: double; border-width: thick; }
+	.mix { border-style: solid; border-width: 1px 2px 10px thick; }
+</style>
 
 
-	<!-- border-color 속성 -->
-	<style>
-		.red { border-color: red; }
-		.green { border-color: rgb(0,255,0); }
-		.blue { border-color: #0000FF; }
-		.mix { border-color: red green blue maroon; }
-		.color { color: teal; }
-	</style>
+<!-- border-color 속성 -->
+<style>
+	.red { border-color: red; }
+	.green { border-color: rgb(0,255,0); }
+	.blue { border-color: #0000FF; }
+	.mix { border-color: red green blue maroon; }
+	.color { color: teal; }
+</style>
 ```
 
 <br>
 
 - 테두리(border)는 위에서 살펴본 padding과 마찬가지로 위쪽, 오른쪽, 아래쪽, 왼쪽 부분에 대하여 개별적으로 스타일을 적용시키는 것이 가능하다; 
 ```html
-	<style>
-		.mixA {
-				border-top-style: dotted;
-				border-right-style: double;
-				border-bottom-style: dotted;
-				border-left-style: double;
-		}
-		.mixB { border-style: dotted double; }
-	</style>
+<style>
+	.mixA {
+			border-top-style: dotted;
+			border-right-style: double;
+			border-bottom-style: dotted;
+			border-left-style: double;
+	}
+	.mixB { border-style: dotted double; }
+</style>
 ```
 
 <br>
 
 - border도 축약 표현(border shorthand)이 가능하다;
 ```html
-	<style>
-		.good { border: 3px solid teal; }
-		.wrong { border: 5px teal; }
+<style>
+	.good { border: 3px solid teal; }
+	.wrong { border: 5px teal; }
 
-		/* 4면이 모두 다른 값을 갖을 땐 top, right, left, bottom순으로 각각의 값을 적어 넣고, 만약 4면 전부 똑같은 값을 사용할 때는 값을 한 번만 적는다.*/
-		div{
-			border-style-top: dotted;
-			border-style-right: dashed;
-			border-style-bottom: solid;
-			border-style-left: double;
-		}
-		div{
-			border-style: dotted;
-		}
-		/* 만약 top, bottom이 같은 값을 갖고, right와 left가 같은 값을 갖는다면 아래와 같이 설정한다. */
-		div{
-			border-style: dotted dashed;
-		}
-	</style>
+	/* 4면이 모두 다른 값을 갖을 땐 top, right, left, bottom순으로 각각의 값을 적어 넣고, 만약 4면 전부 똑같은 값을 사용할 때는 값을 한 번만 적는다.*/
+	div{
+		border-style-top: dotted;
+		border-style-right: dashed;
+		border-style-bottom: solid;
+		border-style-left: double;
+	}
+	div{
+		border-style: dotted;
+	}
+	/* 만약 top, bottom이 같은 값을 갖고, right와 left가 같은 값을 갖는다면 아래와 같이 설정한다. */
+	div{
+		border-style: dotted dashed;
+	}
+</style>
 ```
 
 <br>
@@ -180,39 +180,39 @@ CSS를 사용하면 마진 영역의 크기를 방향별로 따로 설정할 수
 	- margin-left
 - 사용 예시; 
 ```html
-	<style>
-		div.mar {
-			margin-top: 50px;
-			margin-right: 10px;
-			margin-bottom: 30px;
-			margin-left: 100px;
-		}
-	</style>
+<style>
+	div.mar {
+		margin-top: 50px;
+		margin-right: 10px;
+		margin-bottom: 30px;
+		margin-left: 100px;
+	}
+</style>
 ```
 <br>
 
 - margin 속성값을 음수로 설정하여 해당 요소를 다른 요소의 위에 겹치게 할 수도 있다.
 ```html
-	<style>
-		div.mar {
-			margin-top: -25px;
-			margin-right: 10px;
-			margin-bottom: 30px;
-			margin-left: 100px;
-		}
-	</style>
+<style>
+	div.mar {
+		margin-top: -25px;
+		margin-right: 10px;
+		margin-bottom: 30px;
+		margin-left: 100px;
+	}
+</style>
 ```
 <br>
 
 - margin 속성값을 inherit로 설정하면, 부모(parent) 요소의 margin 속성값을 그대로 물려받는다.
 ```html
-	<style>
-		div.parent { height: 100px; margin-left: 100px; }
-		div.child { background-color: #FFF8DC; margin-left: inherit; }
-	</style>
+<style>
+	div.parent { height: 100px; margin-left: 100px; }
+	div.child { background-color: #FFF8DC; margin-left: inherit; }
+</style>
 ```
 <div style="padding-left: 45px;">
-	<img src="./images/margin_example.png" alt="margin 속성값을 inherit으로 설정했을 때 예시" width="400px" />
+	<img src="./images/margin_example.png" alt="margin 속성값을 inherit으로 설정했을 때 예시" width="600px" height="350px" />
 </div>
 
 <br>
@@ -220,21 +220,21 @@ CSS를 사용하면 마진 영역의 크기를 방향별로 따로 설정할 수
 - 마진 축약 표현(margin shorthand);   	  
 모든 margin 속성을 이용한 스타일을 한 줄에 설정할 수 있다.
 ```html 
-	<style>
-		/* 4개의 margin 속성값을 가질 때는 top, right, bottom,left 순으로 설정한다. */
-		div.four { margin: 20px 50px 30px 50px; }
+<style>
+	/* 4개의 margin 속성값을 가질 때는 top, right, bottom,left 순으로 설정한다. */
+	div.four { margin: 20px 50px 30px 50px; }
 
-		/* 아래 예제에 나와있는 3개의 margin 속성값은 
-			margin-top: 10px; 
-			margin-right: 20px; 
-			margin-bottom: 30px; 
-			margin-left: 20px;     와 같은 의미다! */
-		div.three { margin: 10px 20px 30px; }
-		
-		/* 2개의 margin 속성값을 가질 때는 top, bottom은 같은 속성값을 갖고, 
-		right와 left는 같은 값을 갖는다. */
-		div.two{ maring: 10px 20px; }
-	</style>
+	/* 아래 예제에 나와있는 3개의 margin 속성값은 
+		margin-top: 10px; 
+		margin-right: 20px; 
+		margin-bottom: 30px; 
+		margin-left: 20px;     와 같은 의미다! */
+	div.three { margin: 10px 20px 30px; }
+	
+	/* 2개의 margin 속성값을 가질 때는 top, bottom은 같은 속성값을 갖고, 
+	right와 left는 같은 값을 갖는다. */
+	div.two{ maring: 10px 20px; }
+</style>
 ```
 <br>
 
@@ -247,24 +247,24 @@ CSS를 사용하면 마진 영역의 크기를 방향별로 따로 설정할 수
 		~~브라우저를 개발자 도구를 켜고 검사를 해보면 여백이 없다고 나올 것이다.~~
 		- margin 속성값을 auto로 설정하면, 웹 브라우저는 수평 방향 마진(margin) 값을 자동으로 설정하게 되는데, 해당 HTML 요소의 왼쪽과 오른쪽 마진을 자동으로 균등 배분하기 떄문에, 그 결과 해당 요소는 그 요소를 포함하고 있는 부모 요소의 정중앙 위치하게 되는 것이다. 
 ```html
-	<div class="center">이 요소는 중앙 정렬입니다.</div>
-	<div class="outside">이 요소는 컨테이너 밖으로 빠져 나갔습니다.</div>
+<div class="center">이 요소는 중앙 정렬입니다.</div>
+<div class="outside">이 요소는 컨테이너 밖으로 빠져 나갔습니다.</div>
 ```
 ```css
-	.center {
-		margin: auto;
-		background: yellowgreen;
-		width: 50%;
-	}	
+.center {
+	margin: auto;
+	background: yellowgreen;
+	width: 50%;
+}	
 
-	.outside {
-		margin: 3rem 0 0 -3rem;
-		background: lightblue;
-		width: 66%;
-	}
+.outside {
+	margin: 3rem 0 0 -3rem;
+	background: lightblue;
+	width: 66%;
+}
 ```
 <div style="padding-left: 45px;">
-	<img src="./images/margin_auto_example.png" alt="margin 속성 중 auto를 사용해야 하는 이유" width="450px" height="250px" />
+	<img src="./images/margin_auto_example.png" alt="margin 속성 중 auto를 사용해야 하는 이유" width="600px" height="350px" />
 </div>
 
 [auto 속성]: https://developer.mozilla.org/ko/docs/Web/CSS/margin
@@ -300,50 +300,50 @@ CSS를 사용하면 마진 영역의 크기를 방향별로 따로 설정할 수
 
 - 사용 예시; 
 ```html
-	<!-- outline-style 속성 -->
-	<style>
-		p.dotted {outline-style: dotted;}
-		p.dashed {outline-style: dashed;}
-		p.solid {outline-style: solid;}
-		p.double {outline-style: double;}
-		p.groove {outline-style: groove;}
-		p.ridge {outline-style: ridge;}
-		p.inset {outline-style: inset;}
-		p.outset {outline-style: outset;}
-		p.none {outline-style: none;}
-		p.hidden {outline-style: hidden;}
-		/* cf. http://tcpschool.com/css/css_boxmodel_outline */
-	</style>
+<!-- outline-style 속성 -->
+<style>
+	p.dotted {outline-style: dotted;}
+	p.dashed {outline-style: dashed;}
+	p.solid {outline-style: solid;}
+	p.double {outline-style: double;}
+	p.groove {outline-style: groove;}
+	p.ridge {outline-style: ridge;}
+	p.inset {outline-style: inset;}
+	p.outset {outline-style: outset;}
+	p.none {outline-style: none;}
+	p.hidden {outline-style: hidden;}
+	/* cf. http://tcpschool.com/css/css_boxmodel_outline */
+</style>
 
 
-	<!-- outline-width 속성 -->
-	<style>
-		p.solidA { outline-style: solid; outline-color: violet; outline-width: 2px; }
-		p.solidB { outline-style: solid; outline-color: coral; outline-width: 7px; }
-		p.dashedA { outline-style: dashed; outline-color: violet; outline-width: thin; }
-		p.dashedB { outline-style: dashed; outline-color: coral; outline-width: thick; }
-	</style>
+<!-- outline-width 속성 -->
+<style>
+	p.solidA { outline-style: solid; outline-color: violet; outline-width: 2px; }
+	p.solidB { outline-style: solid; outline-color: coral; outline-width: 7px; }
+	p.dashedA { outline-style: dashed; outline-color: violet; outline-width: thin; }
+	p.dashedB { outline-style: dashed; outline-color: coral; outline-width: thick; }
+</style>
 
-	<!-- outline-color 속성 -->
-	<style>
-		p { border: 1px solid black; outline-style: dashed; }
-		p.red { outline-color: red; }
-		p.green { outline-color: rgb(0,255,0); }
-		p.blue { outline-color: #0000FF; }
-		p.invert { outline-color: invert; }
-	</style>
+<!-- outline-color 속성 -->
+<style>
+	p { border: 1px solid black; outline-style: dashed; }
+	p.red { outline-color: red; }
+	p.green { outline-color: rgb(0,255,0); }
+	p.blue { outline-color: #0000FF; }
+	p.invert { outline-color: invert; }
+</style>
 ```
 
 <br>
 
 - outline도 축약 표현(outline shorthand)이 가능하다; 
 ```html
-	<style>
-		p { border: 1px solid black; }
-		p.none { border-style: none; }
-		p.good { outline: 3px solid teal; }
-		p.wrong { outline: 5px teal; }
-	</style>
+<style>
+	p { border: 1px solid black; }
+	p.none { border-style: none; }
+	p.good { outline: 3px solid teal; }
+	p.wrong { outline: 5px teal; }
+</style>
 ```
 
 <br>

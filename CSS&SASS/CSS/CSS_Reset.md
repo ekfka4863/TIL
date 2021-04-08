@@ -59,7 +59,9 @@ date: 2021-04-08-Thursday
 	- https://soma0sd.tistory.com/80
 	- http://hleecaster.com/css-reset-normalize/
 	- https://webisfree.com/2017-09-18/reset-css-base-css-common-css-언제-어떻게-사용하는가
-	-https://webpublishingonline.com/entry/Reset-CSS와-Normalize-CSS가-필요한-이유
+	- https://webpublishingonline.com/entry/Reset-CSS와-Normalize-CSS가-필요한-이유
 http://hleecaster.com/css-reset-normalize/
+	- https://www.jsdelivr.com/package/npm/reset-css      
+	(이거 reset.css 파일로 추천!)
 
 </details>
