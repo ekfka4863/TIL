@@ -212,7 +212,7 @@ CSS를 사용하면 마진 영역의 크기를 방향별로 따로 설정할 수
 </style>
 ```
 <div style="padding-left: 45px;">
-	<img src="./images/margin_example.png" alt="margin 속성값을 inherit으로 설정했을 때 예시" width="600px" height="350px" />
+	<img src="./images/margin_example.png" alt="margin 속성값을 inherit으로 설정했을 때 예시" width="800px" height="450px" />
 </div>
 
 <br>
@@ -264,7 +264,7 @@ CSS를 사용하면 마진 영역의 크기를 방향별로 따로 설정할 수
 }
 ```
 <div style="padding-left: 45px;">
-	<img src="./images/margin_auto_example.png" alt="margin 속성 중 auto를 사용해야 하는 이유" width="600px" height="350px" />
+	<img src="./images/margin_auto_example.png" alt="margin 속성 중 auto를 사용해야 하는 이유" width="800px" height="450px" />
 </div>
 
 [auto 속성]: https://developer.mozilla.org/ko/docs/Web/CSS/margin
