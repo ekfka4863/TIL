@@ -1,5 +1,5 @@
 ---
-date: 2021-04-20-Tuesday
+date: 2021-04-20-Tuesday ~ 2021-04-22-Thursday
 ---
 
 # 객체(Object)
@@ -65,6 +65,110 @@ date: 2021-04-20-Tuesday
 	// (new B()).hello();  --> 위와 같은 거~ 
 	// 출력 결과: hello
 ```
+- 예를 들어보자, 
+```javascript
+// 기억할 점 1) 객체를 생성할 때는 대문자를 사용! e.g. Animal
+	function Animal(type, name, sound) {
+		this.type = type;
+		this.name = name;
+		this.sound = sound;
+		this.say = function() {   // 익명 함수
+			console.log(this.sound);
+		}
+	}
+
+	const dog = new Animal('개', '멍멍이', '멍멍');   // 기억할 점 2) 객체를 생성할 땐 new라는 키워드를 사용한 다는 것
+	const cat = new Animal('고양이', '야옹이', '야옹');
+
+	dog.say();    // 멍멍
+	cat.say();    // 야옹
+```
+- 그런데 위의 예시에서, 'say'라는 함수는 객체를 생성할 때마다 parameter로 받은 type, name, sound는 새롭게 객체가 생성될 때마다 새로 생기는데, 근데 ~~여기서 약간 비효율적인 것은~~ 함수 say는 같은 내용으로 새로운 Animal이 만들어 질때마다 또 하나의, 같은 기능을 하는 함수 say가 반복 생성이 되고 있다는 점이다. 이렇게 각 Animal이 생성된에 따라 type, name, sound는 각 Animal 마다 다른 값을 가질텐데, 함수 say는 this.sound로 똑같은 내용인데 계속 반복되니까 이것을 어떻게 처리하면 좋을까?   
+일단 `function Animal(parameter) {}` 밖으로 빼는 것이 좋겠다. 아래와 같이;
+```Javascript
+	function Animal(type, name, sound) {
+		this.type = type;
+		this.name = name;
+		this.sound = sound;
+	}
+
+	// say라는 함수를 위에 있는 객체 생성자 함수 바깥으로 꺼내보자! 그래서 재사용할 수 있게 하자! 
+	// HOW? --> 프로토타입을 사용해서...
+	Animal.prototype.say = functioin() {
+		console.log(this.say);
+	}
+
+	const dog = new Animal('개', '멍멍이', '멍멍');   
+	const cat = new Animal('고양이', '야옹이', '야옹');
+
+	dog.say();    // 멍멍
+	cat.say();    // 야옹
+ 
+	/* 정상적으로 작동한다. 그럼 기존에 했던 것과의 차이점은? 
+	함수뿐만 아니라 어떤 값을 "재사용"하고 싶다고 하면 위와 같이 프로토타입을 사용하면 된다. */
+	// e.g. 
+	Animal.prototype.sharedValue = '동물';
+
+	console.log(dog.sharedValue);  // 동물 
+	console.log(cat.sharedValue);  // 동물 
+	/* 즉, dog 안에도, 그리고 cat 안에도 '동물'이라는 값이 들어있다는 의미. 
+	그래서 "프로토타입"의 역할/하는일은 무엇이냐면...
+	우리가 객체 생성자로 어떠한 객체를 만들었을 때, 그리고 그 객체에 대하여 함수 또는 값을 "재사용(객체들 간에 서로 공유)"하고 싶을 때, 그 함수나 값을 객체 생성자 함수로 생성한 객체의 "프로토타입"으로 설정을 하면 객체들 간에 재사용, 즉, 공유가 가능하게끔 하는 것이다. */
+```
+- 그래서 위와 같은 "프로토타입"의 역할을 보면, 우리는 프로토타입 기반의 언어인 자바스크립트가 어떻게 프로토타입을 기반으로 하여 `상속`이라는 것이 가능하게 하는지를 이해할 수 있다; 
+```javascript
+	// 아래와 같은 상황이라고 가정해보자; 
+	function Dog(name, sound) {
+		this.type = '개';
+		this.name = name;
+		this.sound = sound;
+	}
+
+	function Cat(name, sound) {
+		this.type = '고양이';
+		this.name = name;
+		this.sound = sound;
+	}
+
+	Dog.prototype.say = function() {
+		console.log(this.sound);
+	}
+
+	Cat.prototype.say = function() {
+		console.log(this.sound);
+	}
+
+	// 위에를 보면 Dog와 Cat이라는 객체를 생성하는 생성자 함수가 거의 비슷한데도 불구하고 두 번 적은 것을 알 수 있다. 이런 상황에서 유용하게 쓰이는 개념이 바로 "상속"이다.
+	// 프로토타입의 기반으로 한 "상속"은 아래와 같다; 
+	function Animal(type, name, sound) {
+		this.type = type;
+		this.name = name;
+		this.sound = sound;
+	}
+	Animal.prototype.say = function() {
+		console.log(this.sound);
+	}
+	// 여기까지 하고 나서... 이제 Dog와 Cat이라는 객체 생성자 함수를 만들기는 할건데, 어떻게 만들거냐면...
+	// 최대한 Animal이 갖고 있는 것을 재사용하는 방향으로 만들 것! 아래와 같이; 
+	function Dog(name, sound) {  // 이떄. type은 자체적으로 {} 안에 넣을거라 필요하지 않음!
+		Animal.call(this, '개', name, sound);  // 여기서 call이란 것을 사용한다. 
+		                                      // 이때, call 이란 함수를 사용할 거면, ()의 처음 오는 parameter에다가 이 객체 생성자 함수에서의 this를 넣어주고, 그 다음 들어오는 것들은 Animal의 () 안에 들어오는 parameter들을 의미한다.
+	}
+	// 그리고 Cat도 위와 비슷하게 만들어 준다; 
+	function Cat(name, sound) { 
+		Animal.call(this, '고양이', name, sound);  
+	}
+
+	// 그리고 나서 해줘야 하는 것이 있다! 
+	// 결국 우리는 "최대한 Animal이 갖고 있는 것을 재사용하는 방향"으로 만든 것이기 때문에 ... 
+	// Dog 와 Cat의 프로토타입이 결국 Animal의 프로토타입과 같다고 명시한다; 그래야지 "공유"가능!
+	Dog.prototype = Animal.prototype;
+	Cat.prototype = Animal.prototype;
+```
+- 위의 예시를 통해, 우리는 `객체 생성자 함수`, `상속을 받는 법`, 그리고 `프로토타입의 역할과 사용 방법`에 대해 알아보는 시간을 갖었다.   
+다시, 프로토타입의 역할은 ~~간단히 말하자면~~ <u>어떠한 공유되는 함수나 값을 설정하는 것</u>이고,   
+객체 생성자는 함수를 `new 키워드`를 사용해서 어떠한 새로운 객체를 만들게 됐을 때, 그 객체 내부에 여러 '값'을 parameter를 넣어 설정하거나,   
+또는 `객체.prototype.함수`를 이용해서 어떠한 함수를 프로토타입으로 설정하여 재사용(객체들간에 서로 공유)할 수 있게 해준다. 
 
 <br>
 <br>

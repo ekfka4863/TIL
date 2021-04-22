@@ -26,14 +26,100 @@ date: 2021-04-21-Wednesday
 	// class 정의 방법 1 -  선언적 방식 
   class A {}
 
-	console.log(new A());
-
 	// class 정의 방법 2 - class 표현식을 변수에 할당
 	const B = class {};
+
+	const 
 	
 	// 선언적 방식(cf. )이지만 호이스팅은 일어나지 않는다. 
 ```
 https://velog.io/@wkdgusrhkd/클래스-class-in-JavaScript
+- 예시를 통해 class를 좀 더 이해해보자; 
+```javascript
+	class Animal {
+		// class 에서는 생성자 함수 비스무리한 것이 있는데 이를 constructor 라고 부른다. 생성자라는 의미를 갖고있고, 여기서!! 여기서 parameter를 받아온다.
+		constructor(type, name, sound) {
+			this.type = type;
+			this.name = name;
+			this.sound = sound;
+		}
+		say() {
+			console.log(this.sound);
+		}
+	}
+
+	// 그리고 변수에 할당... 
+	const dog = new Animal('개', '멍멍이', '멍멍');
+	const cat = new Animal('고양이', '야옹이', '야옹');
+
+	dog.say();   // 멍멍
+	cat.say();   // 야옹
+
+
+	/* 이때! 유의사항! 
+	물론 지금은 class 키워드를 사용했지만 위에서 만든 함수 say는 자동으로 프로토타입으로 저장이 된다. 
+	이는 아래와 같이 확인이 가능하다; */
+	console.log(Animal.prototype.say);   // function say() {}  <constructor>: "Function" name:"Function" --> 함수가 프로토타입으로 설정돼있는 것을 확인할 수 있다 
+
+	// 그리고 이미 클래스가 더 익숙한 사람이라면... 또는 그것이 아니더라도... 클래스 문법을 사용하면 상속을 사용해야 하는 상황에서 좀 더 쉽게 할 수 있음~
+	class Dog extends Animal {    // 이때 사용되는 것이 "extends" 라는 키워드! 여기서 "extends"는 Dog가 Animal의 클래스를 '상속받는다'는 의미를 갖고있다.
+		constructor(name, sound) {   // 그래서 여기서는 constructor만 선언을 해주면 된다. 이때, 여기서의 constructor는 위에 Animal에서 사용된 것을 "덮어쓴다." 이런 과정에서 사용되는 키워드가 바로 "super"다. 
+			super('개', name, sound);
+		}
+	}
+
+	// class Cat 도 똑같다... 
+	class Cat extends Animal {
+		constructor(name, sound) {
+			super('고양이', name, sound);
+		}
+	}
+
+	const dog = new Dog('멍멍이', '멍멍');  // name은 '멍멍이', sound는 '멍멍'
+	const cat = new Cat('야옹이', '야옹');  // name은 '야옹이', sound는 '야옹'  
+	// 이런식으로 게속해서 Animal을 상속받은 객체를 만들어 낼 수 있다...
+	const cat_2 = new Cat('야옹쓰', '야오오오오옹');
+
+	dog.say();        // 멍멍
+	cat.say();        // 야옹
+	cat_2.say();      // 야오오오오옹
+```
+- 다른 예시; 
+```javascript
+	// class Food 라는 걸 만들고, 상속하는 법까지 연습해보자... 
+	class Food {
+		constructor(name) {
+			this.name = name; 
+			this.brands = [];  // this.brands 라는 아이는 빈배열이라고 해놓자...
+		}
+		addBrand(brand){              // 클래스 안에 구현한 함수를 "메서드"라고 부른다 
+			this.brands.push(brand)           // parameter로 받아온 brand를 this.brands = [];에 넣어줄 것! .push(brand)를 사용해서!
+		}
+		print() {                     // 그리고 print라는 이름의 메서드를 만들어 준다 ... 
+			console.log(`${this.name}을(/를) 파는 음식점들:`);
+			console.log(this.brands.join(', '));   // .join() 배열 안에있는 것을 합칠 때 사용... 
+		};
+	}
+
+	const pizza = new Food('피자');
+	pizza.addBrand('피자헛');
+	pizza.addBrand('도미노피자');
+
+	const chicken = new Food('치킨');
+	chicken.addBrand('굽네치킨');
+	chicken.addBrand('BBQ');
+
+	pizza.print();
+	/* 출력 결과: 
+		피자을 파는 음식점들:
+		피자헛, 도미노피자   */
+	chicken.print();
+	/* 출력 결과: 
+		치킨을 파는 음식점들:
+		굽네치킨, BBQ   */
+```
+- 지금까지 지금까지 클래스라는 문법에 대해서 알아봤는데, 이 클래스라는 문법은 결국 객체 생성자와 그리고 프로토타입을 조금 더 쉽게 사용하기 위해 만들어진 문법이라고 생각하면 되겠다.
+
 <br>
 <br>
 <br>
@@ -118,7 +204,9 @@ https://ichi.pro/ko/jaba-seukeulibteu-inteobyu-maseuteo-keullaeseuwa-peuloto-tai
 
 > 그렇다면 자바스크립트에서 class 키워드는 지양해야 하는 것인가?
 - 이에 대한 <u>정답은 없다.</u>  
-자바스크립트 개발자라면 사실 프로토타입 기반의 언어를 그에 맞게 사용하는 것이 좋을 수도 있다. 하지만, 그렇다고 해서 자바스크립트의 클래스를 아예 사용하지 않는 것 또는 무조건 피하는 것이 가능한 일인지도 맞는 일인지도 모르겠다.    
+자바스크립트 개발자라면 사실 프로토타입 기반의 언어를 그에 맞게 사용하는 것이 좋을 수도 있다.   
+하지만, 그렇다고 해서 자바스크립트의 클래스를 아예 사용하지 않는 것 또는 무조건 피하는 것이 가능한 일인지도 맞는 일인지도 모르겠다.    
+~~이미 클래스를 사용하는 것에 익숙하다면 클래스를 더 선호할 수도...~~
 **왜냐면 그 판단은 정적 타입 언어와 동적 타입 언어에 대한 개발자의 입장 차이이기 때문이다.** 그렇기 때문에 올바른 답은 없다고 봐야하겠다. 
 
 
