@@ -1,0 +1,19 @@
+/* heading */
+h2{}
+
+/* content */
+.text{}
+
+/* button */
+#open-btn{}
+
+
+/* 모달 */
+.modal-wrapper{
+	display: none;
+}
+.modal{}
+.modal-title{}
+.modal p {}
+.close-wrapper{}
+.close-wrapper button{}

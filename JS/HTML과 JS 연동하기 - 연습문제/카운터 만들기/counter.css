@@ -1,0 +1,44 @@
+.counter-wrapper{
+	position: relative;
+	/* border: 1px solid black;
+	background-image: url(./note.jpg);
+	background-size: 100%; 
+	background-repeat: no-repeat; */
+}
+.show-number{
+	background-color: rgba(173, 216, 230, 0.766);
+	border-radius: 7px;
+	text-align: center;
+	font-size: 4rem;
+	font-weight: 500;
+	display: inline-block;
+	min-width: 27%;
+	min-height: 30%;
+	margin: 50px 0 20px 0;
+	padding: 10px 0  5px 0;
+}
+
+/* buttons */
+.buttons-wrapper{
+	position: absolute;
+	top: 100%;
+	left: 1%;
+
+	/* box-sizing: border-box; margin: 0px; */
+}
+button{
+	padding: 10px 15px;
+	border:1px solid lightgray;
+	border-radius: 7px;
+	background-color: white;
+	font-size: 1rem;
+}
+button:hover{
+	box-shadow:1px 1px 3px 1px rgba(173, 216, 230, 0.766), -1px -1px 3px 1px lightblue;
+}
+
+.minus-one{
+	margin-right: 10px;
+}
+
+.minus-one{}

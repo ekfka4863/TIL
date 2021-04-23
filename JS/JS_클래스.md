@@ -231,9 +231,11 @@ https://mygumi.tistory.com/235
 	- https://developer.mozilla.org/ko/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
 	- https://mygumi.tistory.com/235
 	- https://velog.io/@wkdgusrhkd/클래스-class-in-JavaScript
-	-
-	-
-
+	- https://velog.io/@o_oxxv/JavaScript-class-키워드
+	- https://ko.javascript.info/class
+	- https://curryyou.tistory.com/191
+	- https://velog.io/@jimmyjoo/자바스크립트-객체리터럴
+	- https://dailylifeofdeveloper.tistory.com/15
 
 </details>
 
