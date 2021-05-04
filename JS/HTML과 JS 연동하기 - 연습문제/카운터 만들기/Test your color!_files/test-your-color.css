@@ -1,0 +1,541 @@
+/* reset.css 연결 */
+@import "./reset.css";
+/* google font */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+
+
+/* common css */
+/* cf. https://lovediv.tistory.com/2 */
+.a11y-hidden{
+	overflow: hidden;
+	position: absolute;
+	clip: rect(0 0 0 0);
+	/* IE 6,7 */
+	clip: rect(0, 0, 0, 0);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	border: 0;
+	padding: 0;
+}
+.no-style-to-a-tag{
+	text-decoration: none;
+	color: black;
+}
+.special-font-style{
+	font-family: 'Nanum Pen Script', cursive;
+}
+
+
+/* ----------------------------------- */
+
+/* more-test-menu-hidden-wrapper */
+.more-test-menu-hidden-wrapper{
+	position: fixed;
+	top: 0;
+	right: -165px;
+	z-index: 1;
+}
+.more-test-menu-hidden-wrapper  h3{
+	color: aliceblue;
+	font-size: 1.6rem;
+	text-align: center;
+	background-color: #D5BAAC;
+	padding: 10px;
+}
+.more-test-menu-hidden-wrapper ul{
+	height: 100vh;
+	/* background-color: #879D82; */
+	background-color: rgba(213, 186, 172, 0.97);
+}
+.more-test-menu-hidden-wrapper li{
+	padding: 10px;
+}
+.more-test-menu-hidden-wrapper li:first-child{
+	background-color: #ACB2A3;
+}
+.more-test-menu-hidden-wrapper li:nth-child(2){
+	background-color: #D69C6E;
+}
+.more-test-menu-hidden-wrapper li:last-child{
+	background-color: #515457;
+}
+.more-test-menu-hidden-wrapper a{
+	color: aliceblue;
+	font-size: 1.5rem;
+	text-align: center;
+} 
+
+.close-more-test-menu-btn{
+	position: absolute;
+	top: 0;
+	left: -43px;
+	border: transparent;
+	/* background-color: transparent; */
+	background-color: #D5BAAC;
+	padding: 0;
+}
+.close-more-test-menu-btn:hover{
+	cursor: pointer;
+}
+.close-more-test-menu-btn:active{
+	width: 45px;
+	height: 45px;
+}
+.close-more-test-menu-btn img{
+	width: 43px;
+	height: 42px;
+} 
+
+
+
+/* ----------------------------------- */
+
+/* .start-test-btn 클릭시 모달창 */
+.test-modal-wrapper{
+	display: none;
+	position: relative;
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	margin-top: 9vh;
+	/* background-color: #879D82; */
+	/* background-color: rgba(192, 200, 190); */
+}
+.test-modal-window{
+	position: absolute;
+	background-color: rgba(70, 118, 129);
+  width: 500px;
+	/* height: 86.5vh; */
+	/* height: 800px; */
+	height: fit-content;
+	top: 34.1%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	/* cf. 포지션 앱솔루트 하고도, 가운데 정렬하는 방법: 
+	        https://firerope.tistory.com/4 */
+}
+.test-modal-btns{
+	display: flex;
+	justify-content: space-between;
+}
+.test-modal-btns button:first-child, 
+.test-modal-btns button:last-child{
+	width: fit-content;
+	border: transparent;
+	background-color: transparent;
+	padding: 1px 2px 0px 2px;
+	margin: 5px;
+}
+.test-modal-btns button:first-child{
+	order: 2;
+}
+.test-modal-btns button:first-child:hover, 
+.test-modal-btns button:last-child:hover{
+	cursor: pointer;
+}
+.test-modal-btns button:first-child:active, 
+/* 이 부분 고치기! */
+.test-modal-btns button:last-child:active{
+	/* width: 51px;
+	height: 31px;
+	transition: 0.5s ease; */
+}
+.test-modal-btns button:first-child img,
+.test-modal-btns button:last-child img{
+	width: 50px;
+	height: 30px;
+}
+.test-modal-contents{
+	/* border: 1px solid black; */
+}
+#test-modal-contents-paragraph{
+	padding: 15px 5px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 1.5rem;
+	color: rgb(203, 215, 226);
+}
+
+/* 심리테스트 컬러 옵션들 */
+.test-modal-color-option-wrapper{
+}
+.test-modal-color-options{
+	margin-top: 30px;
+}
+
+.test-modal-color-options input[type=checkbox] {
+	cursor: pointer;
+	display: inline-block;
+	/* margin-right: 10px; */
+	margin-top: 40px;
+}
+.test-modal-color-options label{
+	display: inline-block;
+	cursor: pointer;
+	padding-left: 22px;
+	padding-top: 30px;
+	width: 70px;
+	height: 70px;
+	background-repeat: no-repeat;
+	font-family: 'Nanum Pen Script', cursive;
+}
+.test-modal-color-options label[for="color1"]{
+	background-image: url(./images/color1.svg);
+}
+.test-modal-color-options label[for="color2"]{
+	background-image: url(./images/color2.svg);
+}
+.test-modal-color-options label[for="color3"]{
+	background-image: url(./images/color3.svg);
+}
+.test-modal-color-options label[for="color4"]{
+	background-image: url(./images/color4.svg);
+}
+.test-modal-color-options label[for="color5"]{
+	background-image: url(./images/color5.svg);
+	color: white;
+}
+.test-modal-color-options label[for="color6"]{
+	background-image: url(./images/color6.svg);
+	color: white;
+}
+.test-modal-color-options label[for="color7"]{
+	background-image: url(./images/color7.svg);
+}
+.test-modal-color-options label[for="color8"]{
+	background-image: url(./images/color8.svg);
+	color: white;
+}
+.test-modal-color-options label[for="color9"]{
+	background-image: url(./images/color9.svg);
+}
+.test-modal-color-options label[for="color10"]{
+	background-image: url(./images/color10.svg);
+	color: white;
+}
+
+
+
+
+
+
+
+
+
+.test-modal-color-options input[type=checkbox]:checked {
+
+}
+
+/*  https://mrb18.tistory.com/entry/CSS-체크박스-이미지로-변경하기 */
+
+
+
+
+
+/* ----------------------------------- */
+
+/* header */
+.header{
+	width: 100%;
+	height: 160px;
+	/* height: 18vh; */
+	background-color: #D9A8A8;
+	position: relative;
+}
+.header-h1-img {
+	display: block;
+	margin: 0px auto;
+	padding: 30px 0;
+}
+.header span{
+	display: block;
+	width: fit-content;
+	margin: 0 auto;
+	padding-top: 5px;
+	color: #ffffff;
+	font-size: 18px;
+	text-align: center;
+}
+.open-more-test-menu-btn{
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 35px 20px 0 0;
+	padding: 0;
+	/* width: fit-content;
+	height: fit-content; */
+	border: transparent;
+	background-color: transparent;
+}
+.open-more-test-menu-btn > img{
+	/* background-color: aquamarine; */
+	width: 35px;
+	height: 35px;
+}
+.open-more-test-menu-btn:hover{
+	cursor: pointer;
+}
+.open-more-test-menu-btn:active{
+	width: 37px;
+	height: 39px;
+	transition: 0.4s ease;
+}
+
+/* main */
+.main{
+	background-color: #FDFDFD;
+	min-height: 55vh;
+	overflow: auto;
+}
+.main h2{
+	width: fit-content;
+	color: #DFCDC7;
+	font-size: 30px;
+	margin: 0 auto;
+	padding: 20px 0;
+}
+/* .color-palette */
+.color-palette{
+	background-color: #E5E5E5;
+	margin: 0 auto;
+	width: 85%;
+	height: 370px;
+	padding: 10px;
+}
+.color-palette > div{
+	display: flex;
+	justify-content: space-around;
+}
+.color-palette > div{
+	padding: 7px;
+}
+.circle{
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+}
+/* palette 첫 번째 row */
+.row-wrapper-1 .circle:first-child{
+	background-color: #5F4029;
+}
+.row-wrapper-1 .circle:nth-child(2){
+	background-color: #995833;
+}
+.row-wrapper-1 .circle:nth-child(3){
+	background-color: #BA8163;
+}
+.row-wrapper-1 .circle:nth-child(4){
+	background-color: #F2AD3D;
+}
+.row-wrapper-1 .circle:nth-child(5){
+	background-color: #9D8137;
+}
+.row-wrapper-1 .circle:last-child{
+	background-color: #C5BA76;
+}
+/* palette 두 번째 row */
+.row-wrapper-2 .circle:first-child{
+	background-color: #373236;
+}
+.row-wrapper-2 .circle:nth-child(2){
+	background-color: #543647;
+}
+.row-wrapper-2 .circle:nth-child(3){
+	background-color: #4F0C1D;
+}
+.row-wrapper-2 .circle:nth-child(4){
+	background-color: #EC682E;
+}
+.row-wrapper-2 .circle:nth-child(5){
+	background-color: #774716;
+}
+.row-wrapper-2 .circle:last-child{
+	background-color: #9B4F27;
+}
+/* palette 세 번째 row */
+.row-wrapper-3 .circle:first-child{
+	background-color: #D69C6E;
+}
+.row-wrapper-3 .circle:nth-child(2){
+	background-color: #F1A93C;
+}
+.row-wrapper-3 .circle:nth-child(3){
+	background-color: #A49254;
+}
+.row-wrapper-3 .circle:nth-child(4){
+	background-color: #898464;
+}
+.row-wrapper-3 .circle:nth-child(5){
+	background-color: #515457;
+}
+.row-wrapper-3 .circle:last-child{
+	background-color: #D5BAAC;
+}
+/* palette 네 번째 row */
+.row-wrapper-4 .circle:first-child{
+	background-color: #762F32;
+}
+.row-wrapper-4 .circle:nth-child(2){
+	background-color: #EE7466;
+}
+.row-wrapper-4 .circle:nth-child(3){
+	background-color: #A16646;
+}
+.row-wrapper-4 .circle:nth-child(4){
+	background-color: #C96929;
+}
+.row-wrapper-4 .circle:nth-child(5){
+	background-color: #E78C5C;
+}
+.row-wrapper-4 .circle:last-child{
+	background-color: #F1994B;
+}
+/* palette 다섯 번째 row */
+.row-wrapper-5 .circle:first-child{
+	background-color: #F9E4C0;
+}
+.row-wrapper-5 .circle:nth-child(2){
+	background-color: #CFAD50;
+}
+.row-wrapper-5 .circle:nth-child(3){
+	background-color: #879D82;
+}
+.row-wrapper-5 .circle:nth-child(4){
+	background-color: #ACB2A3;
+}
+.row-wrapper-5 .circle:nth-child(5){
+	background-color: #2C6976;
+}
+.row-wrapper-5 .circle:last-child{
+	background-color: #EC604D;
+}
+
+/* start button */
+.start-test-btn{
+	border: transparent;
+	background-color: transparent;
+	/* background-color: yellow; */
+	display: block;
+	margin: 20px auto;
+	padding: 2px;
+}
+.start-test-btn:hover, .start-test-btn img:hover{
+	cursor: pointer;
+}
+.start-test-btn img:active{
+	height: 51px;
+	transition: 0.1s ease;
+}
+.start-test-btn > img{
+	width: 100px;
+	height: 50px;
+}
+
+
+
+/* footer */
+.footer{
+	z-index: -1;
+	width: 100%;
+	/* height: 350px; */
+	height: 30vh;
+	/* background-color: aqua; */
+	position: relative;
+	bottom: 0;
+}
+.footer-background-img{
+	width: 100%;
+	object-fit: cover;
+	/* background-color: #2C6976;
+	padding: 0;
+	margin-bottom: 0;
+	object-fit: fill; */
+	min-height: 30vh;
+}
+.footer-address{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 20px;
+	font-weight: 600;
+}
+.footer-address p{
+	margin-bottom: 5px;
+}
+.footer-address p, .footer-address a{
+	color: #879D82;
+	font-size: 0.5rem;
+	vertical-align: middle;
+}
+/* 푸터 sns wrapper div */
+.sns-icons-wrapper{
+	/* background-color: yellow; */
+	display: flex;
+	/* justify-content: space-around; */
+}
+.sns-icons-wrapper a{
+	/* background-color: pink; */
+	
+}
+.sns-icons-wrapper i:hover{
+	cursor: pointer;
+}
+.sns-icons-wrapper i:active{
+	color: #879D82;
+	font-size: 1.5rem;
+}
+.sns-icons-wrapper i{
+	/* background-color: pink; */
+	font-size: 1.4rem;
+	padding: 3px 6px 3px 0px;
+}
+
+
+
+/* ----------------------------------- */
+
+
+/* 미디아쿼리 */
+/* cf. https://m.blog.naver.com/PostView.nhn?blogId=anedthh&logNo=221311898334&proxyReferer=https:%2F%2Fwww.google.co.kr%2F */
+/* mobile 버전 디자인 - 분기점 */
+@media (max-width: 768px) {
+	.header-h1-img {
+		/* width: 197px; */
+		/* 다른 이미지를 따로 넣어야 하는 방식! */    
+	}
+	.test-modal-window{
+		width: 500px;
+	}
+	.test-modal-color-options input[type=checkbox] {
+		margin-right: 10px;
+	}
+}
+
+/* tablet 버전 디자인 - 분기점 */
+@media (min-width: 768px) and (max-width: 1024px) {
+	.header-h1-img {
+		/* width: 220px; */
+	}
+	.test-modal-window{
+		width: 650px;
+	}
+	.test-modal-color-options input[type=checkbox] {
+		margin-right: 15px;
+	}
+}
+
+/* pc 버전 디자인 - 분기점 */
+@media (min-width: 1025px) {
+	.header-h1-img {
+		/* width: 250px; */
+	}
+	.test-modal-window{
+		width: 850px;
+	}
+	.test-modal-color-options input[type=checkbox] {
+		margin-right: 8px;
+	}
+}
+

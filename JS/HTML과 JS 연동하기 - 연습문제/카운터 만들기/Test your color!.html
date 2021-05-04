@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!-- saved from url=(0256)file:///Users/dayepark/Documents/dev/%E1%84%89%E1%85%B5%E1%86%B7%E1%84%85%E1%85%B5%E1%84%90%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3(toy%20project)/test-your-color.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Test your color!</title>
+	<link rel="preconnect" href="https://fonts.gstatic.com/"> 
+	<link href="./Test your color!_files/css2" rel="stylesheet">
+	<link href="./Test your color!_files/all.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="./Test your color!_files/test-your-color.css">
+	<script defer="" src="./Test your color!_files/test-your-color.js"></script>
+</head>
+
+<body>
+	<!-- open-more-test-menu button을 누르면 나오는 test list들... -->
+	<div class="more-test-menu-hidden-wrapper">
+		<h3>Menu</h3>
+		<ul class="more-test-menu-list">
+			<li class="color-test-1"><a class="no-style-to-a-tag special-font-style" href="file:///Users/dayepark/Documents/dev/%E1%84%89%E1%85%B5%E1%86%B7%E1%84%85%E1%85%B5%E1%84%90%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3(toy%20project)/test-your-color.html#">Color Test 1</a></li>
+			<li class="color-test-2"><a class="no-style-to-a-tag special-font-style" href="file:///Users/dayepark/Documents/dev/%E1%84%89%E1%85%B5%E1%86%B7%E1%84%85%E1%85%B5%E1%84%90%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3(toy%20project)/test-your-color.html#">Color Test 2</a></li>
+			<li class="color-test-3"><a class="no-style-to-a-tag special-font-style" href="file:///Users/dayepark/Documents/dev/%E1%84%89%E1%85%B5%E1%86%B7%E1%84%85%E1%85%B5%E1%84%90%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3(toy%20project)/test-your-color.html#">Color Test 3</a></li>
+		</ul> 	
+		<button class="close-more-test-menu-btn" type="button" aria-roledescription="메뉴창을 닫으시려면 버튼을 클릭하십시오.">
+			<img src="./Test your color!_files/cloce-more-test-menu-2.svg" alt="">
+		</button>	
+	</div>
+	<!--  cf. https://codepen.io/nikhil/details/sicrK -->
+
+	<!-- 헤더 섹션 -->
+	<header class="header">
+		<h1 class="a11y-hidden">Personal Color Test</h1>
+		<img class="header-h1-img" src="./Test your color!_files/header-h1-img.svg" alt="">
+		<span class="special-font-style">36가지의 색깔을 통해 당신의 현재 심리 상태를 알아보세요. <br> 평소 좋아하는 색이 아니라 현재 끌리는 색을 직관적으로 선택하시면 됩니다.</span>
+		<button class="open-more-test-menu-btn" type="button" aria-roledescription="다른 심리테스트를 원하신다면 버튼을 클릭하십시오.">
+			<img src="./Test your color!_files/open-more-test-menu.svg" alt="">
+		</button>
+	</header>
+
+	<!-- 메인 섹션 -->
+
+		<!-- start-test-btn 클릭시 모달창 열리면서 심리 테스트 시작 -->
+		<div class="test-modal-wrapper" style="display: block;">
+			<div class="test-modal-window">
+				<div class="test-modal-btns">
+					<button class="next-test-btn" type="button" aria-roledescription="테스트를 종료하려면 해당 버튼을 클릭하세요.">
+						<img src="./Test your color!_files/next-btn.svg" alt="">
+					</button>
+					<button class="quit-test-btn" type="button" aria-roledescription="다음 질문으로 넘어가시려면 해당 버튼을 클릭하세요.">
+						<img src="./Test your color!_files/quit-btn.svg" alt="">
+					</button>
+				</div>
+				<div class="test-modal-contents">
+					<p id="test-modal-contents-paragraph" class="special-font-style">
+						컬러 심리 테스트를 시작하겠습니다. <br>
+						테스트를 중단하고 싶으시다면 왼쪽에 있는 Quit 버튼을, <br>
+						다음 질문으로 넘어가고 싶으시다면 오른쪽에 있는 Next 버튼을 누르세요. <br>
+						<br>
+						<br>
+						Q. 아래의 색들 중에 가장 마음에 드는 색 3개를 골라주세요. <br>
+						단, 평소 좋아하는 색을 선택하는 것이 아닙니다. 
+					</p>
+					<!-- <img class="test-modal-contents-img" src="./images/color-options-1(500x750px).svg" alt="아래의 색상 중 당신이 고르고 싶은 색상 3개를 선택한 후 결과보기 버튼을 클릭하세요."> -->
+					<div class="test-modal-color-option-wrapper">
+						<div class="test-modal-color-options">
+							<input type="checkbox" id="color1"><label for="color1">no.1</label>
+							<input type="checkbox" id="color2"><label for="color2">no.2</label>
+							<input type="checkbox" id="color3"><label for="color3">no.3</label>
+							<input type="checkbox" id="color4"><label for="color4">no.4</label>
+							<input type="checkbox" id="color5"><label for="color5">no.5</label>
+							<input type="checkbox" id="color6"><label for="color6">no.6</label>
+							<input type="checkbox" id="color7"><label for="color7">no.7</label>
+							<input type="checkbox" id="color8"><label for="color8">no.8</label>
+							<input type="checkbox" id="color9"><label for="color9">no.9</label>
+							<input type="checkbox" id="color10"><label for="color10">no.10</label>
+							<input type="checkbox" id="color11"><label for="color11">no.11</label>
+							<input type="checkbox" id="color12"><label for="color12">no.12</label>
+							<input type="checkbox" id="color13"><label for="color13">no.13</label>
+							<input type="checkbox" id="color14"><label for="color14">no.14</label>
+							<input type="checkbox" id="color15"><label for="color15">no.15</label>
+							<input type="checkbox" id="color16"><label for="color16">no.16</label>
+							<input type="checkbox" id="color17"><label for="color17">no.17</label>
+							<input type="checkbox" id="color18"><label for="color18">no.18</label>
+							<input type="checkbox" id="color19"><label for="color19">no.19</label>
+							<input type="checkbox" id="color20"><label for="color20">no.20</label>
+							<input type="checkbox" id="color21"><label for="color21">no.21</label>
+							<input type="checkbox" id="color22"><label for="color22">no.22</label>
+							<input type="checkbox" id="color23"><label for="color23">no.23</label>
+							<input type="checkbox" id="color24"><label for="color24">no.24</label>
+							<input type="checkbox" id="color25"><label for="color25">no.25</label>
+							<input type="checkbox" id="color26"><label for="color26">no.26</label>
+							<input type="checkbox" id="color27"><label for="color27">no.27</label>
+							<input type="checkbox" id="color28"><label for="color28">no.28</label>
+							<input type="checkbox" id="color29"><label for="color29">no.29</label>
+							<input type="checkbox" id="color30"><label for="color30">no.30</label>
+							<input type="checkbox" id="color31"><label for="color31">no.31</label>
+							<input type="checkbox" id="color32"><label for="color32">no.32</label>
+							<input type="checkbox" id="color33"><label for="color33">no.33</label>
+							<input type="checkbox" id="color34"><label for="color34">no.34</label>
+							<input type="checkbox" id="color35"><label for="color35">no.35</label>
+							<input type="checkbox" id="color36"><label for="color36">no.36</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	
+	<main class="main">
+		<h2 class="special-font-style">What color do you like?</h2>
+		<div class="color-palette">
+			<div class="row-wrapper-1">
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+			</div>
+			<div class="row-wrapper-2">
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+			</div>
+			<div class="row-wrapper-3">
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+			</div>
+			<div class="row-wrapper-4">
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+			</div>
+			<div class="row-wrapper-5">
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+			</div>
+		</div>
+		<button class="start-test-btn" type="button" aria-roledescription="현재 페이지에 있는 컬러 심리테스트를 시작하시려면 버튼을 누르세요.">
+			<img src="./Test your color!_files/start-btn.svg" alt="">
+		</button>
+	</main>	
+
+	<!-- 푸터 섹션 -->
+	<footer class="footer">
+		<img class="footer-background-img" src="./Test your color!_files/footer-background-img-2.svg">
+		<address class="footer-address">
+			<p>© 2021 Charlotte<br><br>
+			대한민국(Seoul, South-Korea)</p>
+			<a class="no-style-to-a-tag" href="mialto:email: _____@gmail.com">email: _____@gmail.com</a><br>
+			<a class="no-style-to-a-tag" href="tel:+010333344444">(010) 3333 4444</a>
+			<div class="sns-icons-wrapper">
+				<a href="file:///Users/dayepark/Documents/dev/%E1%84%89%E1%85%B5%E1%86%B7%E1%84%85%E1%85%B5%E1%84%90%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3(toy%20project)/test-your-color.html#" class="github-icon no-style-to-a-tag"><i class="fab fa-github"></i></a>
+				<a href="file:///Users/dayepark/Documents/dev/%E1%84%89%E1%85%B5%E1%86%B7%E1%84%85%E1%85%B5%E1%84%90%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3(toy%20project)/test-your-color.html#" class="facebook-icon no-style-to-a-tag"><i class="fab fa-facebook-square"></i></a>
+				<a href="file:///Users/dayepark/Documents/dev/%E1%84%89%E1%85%B5%E1%86%B7%E1%84%85%E1%85%B5%E1%84%90%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3(toy%20project)/test-your-color.html#" class="instagram-icon no-style-to-a-tag"><i class="fab fa-instagram-square"></i></a>
+			</div>
+		</address>
+	</footer>
+
+
+
+</body></html>

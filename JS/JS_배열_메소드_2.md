@@ -166,7 +166,17 @@ date: 2021-04-30-Friday
 	console.log(numbers);             // [ 1, 2, 3, 4 ]
 	console.log(sum);                 // 100
 ```
+- `.reduce()`메서드로 "함수에 n개의 숫자들이 파라미터로 주어졌을 때, 그 중 가장 큰 값을 알아내는 것"도 가능하다; 
+```javascript
+	// cf. JS_Spread와Rest문법.md 참고! 
+	function max(...numbers) {
+		return numbers.reduce( (acc, current) => (acc > current ?  acc : current) , numbers[0] );
+	}
 
+	// const result = max(1, 2, 3, 4, 10, 5, 6, 7);
+	const numbers = [1, 2, 3, 4, 10, 5, 6, 7];
+	console.log(max(...numbers));          // 10
+```
 
 <br>
 <br>
@@ -257,6 +267,22 @@ date: 2021-04-30-Friday
 http://blog.302chanwoo.com/2017/08/javascript-array-method/
 ```javascript
 ``` -->
+
+<br>
+<br>
+
+## 원본 배열을 변형시키지 않는 메서드와 변형시키는 메서드
+
+| **변형 O** | **변형 X** (배열의 사본이 생성됨) |
+|:---:|:---:|
+|<u>push</u>|map|
+|<u>pop</u>|concat|
+|<u>shift</u>|filter|
+|<u>unshift</u>|reduce|
+|<u>reverse</u>|reduceRight|
+|<u>sort</u>|join|
+|<u>splice</u>|slice|
+||toString|
 
 <br>
 <br>
