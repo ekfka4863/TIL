@@ -92,6 +92,7 @@ date: 2021-05-14-Friday
 	- 더 쉽고 간단한 차이는 `{}(중괄호)`와 `;(세미콜론)`의 유무다.    
 		- SASS는 중괄호와 세미콜론이 없지만, SCSS는 중괄호와 세미콜론을 사용한다.  
 		  📌  SCSS는 선택자의 유효범위를 {} 중괄호로 구분해주지만. SASS는 선택자의 유효범위를 `들여쓰기`로 구분해준다는 차이가 있다.  
+			~~📌 또 거의 유일하게 차이점이 하나 더 존재하는데 바로 '믹스인'이라는 개념이다. 나중에 더 알아볼 예정!~~
 
 <br>
 <br>
@@ -102,7 +103,7 @@ date: 2021-05-14-Friday
 	- [Stylus](http://learnboost.github.io/stylus/)   
 	- [cssnext](https://cssnext.github.io/)   
 	- [PostCSS](https://github.com/postcss/postcss)   
-- 그리고 SASS(SCSS)를 CSS pre-processor(전처리기)라고 명한 이우는 SASS자체로 브라우저에 적용하는 것이 아니라 CSS를 확장해서 쉽고 편리하게 쓰기 위해서 사용하는 스크립팅 언어이기 때문이다. 따라서 SASS로 작성한 코드는 컴파일 해서 일반 CSS 문법으로 바꾼 뒤 브라우저에 적용된다는 말이다.  
+- 그리고 SASS(SCSS)를 CSS pre-processor(전처리기)라고 명한 이우는 SASS자체로 브라우저에 적용하는 것이 아니라 CSS를 확장해서 쉽고 편리하게 쓰기 위해서 사용하는 스크립팅 언어이기 때문이다. 웹에서는 표준 CSS만 동작할 수 있다. 따라서 SASS로 작성한 코드는 컴파일 해서 일반 CSS 문법으로 바꾼 뒤 브라우저에 적용된다.  
 ~~아래처럼:~~
 	- cf.
 	![SASS가 CSS 전처리기라고 불리는 이유](https://www.mugo.ca/var/ezwebin_site/storage/images/_aliases/full_720/media/images/sass-blog-post-image01/315767-1-eng-US/sass-blog-post-image01.jpg) 
