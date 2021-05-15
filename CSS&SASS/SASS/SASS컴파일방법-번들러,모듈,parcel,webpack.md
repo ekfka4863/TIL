@@ -1,5 +1,5 @@
 ---
-date: 2021-05-14-Friday
+date: 2021-05-14-Friday ~ 2021-05-15-Saturday
 ---
 
 # SASS 컴파일 방법 
@@ -24,10 +24,11 @@ date: 2021-05-14-Friday
 - 위와 같이 번들러를 사용해서 얻는 <u>장점</u>:
 	1. 번들러는 네트워크의 병목현상을 최소화 시켜준다.   
 	번들러는 여러 파일을 하나의 파일로 묶어서 보내주고, 또 번들러가 여러 개의 파일들을 하나의 번들로 만들어 줄 때는 '종속성'을 알아서 확인하여 사용하지 않는 파일은 포함시키지 않는다. 따라서 파일의 크기가 줄어들고 페이지 로딩을 보다 빠르게 할 수 있게 된다. 
-	2. '모듈'이라는 독립적인 공간 단위로 코딩을 할 수 있게된다. 
+	2. '모듈'이라는 독립적인 공간 단위로 코딩을 할 수 있게된다.   
 	번들러는 모듈 단위의 코딩을 가능하게 한다. 모듈 단위 코딩을 하게 되면 각 모듈이 독립적이기 때문에 앞서 문제점으로 언급된 중복된 변수명 등으로 인해 에상치 못한 에러가 발생하는 것을 막을 수 있다. 또 모듈 단위로 웹 어플리케이션의 기능을 구분하여 코딩하기 때문에 코드의 가독성이나 유지보수 측면에서 유용하단 장점이 있다. 
 	3. 번들러 중 webpack은 로더(babel-loader)~~라는 것이 있는데 이~~ 를 통해 Babel이라는 ES6 이상의 자바스크립트 문법을 ES5 버전의 자바스크립트 문법으로 변환시켜주는 트랜스파일러를 사용할 수 있다. 이를 활용하여 ES5만 지원하는 오래된 브라우저에서도 ES6+ 문법으로 이루어진 자바스크립트 파일을 작동할 수 있게 힌다.  
-	4. **SASS를 사용할 수 있게한다. 예를 들어, webpack에는 style-loader와 css-loader, sass-loader라는 로더가 있다. 이 로더를 사용하면 SASS를 CSS로 컴파일하여 사용할 수 있게된다.**
+	4. **SASS를 사용할 수 있게한다.   
+	예를 들어, webpack에는 style-loader와 css-loader, sass-loader라는 로더가 있다. 이 로더를 사용하면 SASS를 CSS로 컴파일하여 사용할 수 있게된다.**
 
 
 <br>
@@ -47,9 +48,10 @@ date: 2021-05-14-Friday
 	- 한번 다운로드된 모듈은 웹브라우저에 의해서 저장되기 때문에 동일한 로직을 로드 할 때 시간과 네트워크 트래픽을 절약 할 수 있다. (브라우저에서만 해당)
 
 <br>
+<hr>
 <br>
 
-# 번들러 알아보기 (Parcel VS Webpack)
+## 번들러 알아보기 (Parcel VS Webpack)
 - Parcel 과 WebPack은 Bundler라는 공통점을 가진다.   
 WebPack의 경우는 일반적으로 많은 설정이 필요하고 이를 구성하는데 많은 시간을 필요로 하지만, Parcel의 경우 설정이 따로 필요하지 않아 빠르게 적용이 가능하다라는 장점이 있다.   
 그래서 우리는 Parcel을 알아보는 시간을 갖도록 하겠다...   
@@ -58,35 +60,35 @@ WebPack의 경우는 일반적으로 많은 설정이 필요하고 이를 구성
 <br>
 <br>
 
-## Parcel 
+### Parcel 
 - 먼저, What is parcel? 
 	- Parel은 Webpack과 함께 bundler 시장의 점유율을 나눠갖고 있는 모듈 번들러이다. 번들러(bundler)란 dependency가 있는 자바스크립트 파일들을  최적화, 압축하여 하나 혹은 여러개의 static 파일로 빌드해주는 컴파일러이다.
 	- How to start with Parcel?    
 	공식 홈페이지의 헤드라인부터 **불꽃 튀게 빠르고 설정이 필요 없는 웹 애플리케이션 번들러**라고 적혀있는 Parcel은 아래와 같이 간단한 명령어로 설치가 가능하다.
-		- CLI 환경에서 Yarn 이나 npm 으로 Parcel을 설치하면 된다;    
+		- CLI 환경에서 Yarn 이나 npm 으로 Parcel을 설치하면 된다;   
+		~~(cf. 기본적으로 Node.js 환경/npm(Node Package Manager; 자바스크립트를 위한 패키지 관리자) 환경이 사용이 가능할 때 활용할 수 있다.)~~   
 		Yarn:  
 		`yarn global add parcel-bundler`
-		<br>
+		<br> 
 		npm:  
 		`npm install -g parcel-bundler`  
-		[참고 링크1](https://ko.parceljs.org/getting_started.html)
-		[참고 링크2](https://junhobaik.github.io/parcel-start/https://junhobaik.github.io/parcel-start/)
+			[참고 링크1](https://ko.parceljs.org/getting_started.html)   
+		  [참고 링크2](https://junhobaik.github.io/parcel-start/https://junhobaik.github.io/parcel-start/)  
+
 		- 빠른 빌드 실행:   
 		별도의 설정 없이 진입 파일(Entry file)만 지정하면 바로 빌드(Build)한다.   
 		`parcel index.html`
 		- 자동 변환:   
 		Parcel은 가장 많이 사용하는 Babel, PostCSS(특히 Autoprefixer) 같은 트랜스파일러들을 내장 하여 지원한다. ~~다시,~~ 모듈 안에 .babelrc, .postcssrc 같은 설정 파일들을 발견하면 자동으로 변환해준다.
  		- 시작하기:    
-		디렉토리(폴더)를 만들고, 디렉토리로 이동해서 파일을 .json형식으로 만들어 준다. 그리고 `npm init`을 하면 된다. 
+		디렉토리(폴더)를 만들고, 디렉토리로 이동해서 파일(e.g. `.scss`, `.html` 등의 파일...)을 만들어 준다. 그리고 `npm init (-y)`을 하면 된다.   
+		웹에서 직접적으로 돌아가지 못하는 확장자의 파일도 parcel 번들러를 통해서 컴파일을 시켜서 동작을 시키면 파일이 제대로 돌아가는 것을 확인할 수 있다.   
+		Node.js가 돌아가는 환경에서 `npm init (-y)` 명령어를 입력하면 `package.json`이 생성되는 것을 확인할 수 있을 것이다.   
+		그리고 나서 `npm install --save-dev parcel-bundler`를 입력하면 dev dependency 로 설치할 수 있게된다. 여기서 `의존성(dependency)`이란 한 마디로 해당 프로젝트가 돌아가기 위해 필요한 npm 패키지들을 의미한다. 이 의존성은 package.json 파일에 정의된다.  
+		마지막으로 `npx parcel [원하는 파일이름과.확장자]`를 명령어로 입력하면 parcel로 해당 파일을 실행하게 되고, 이와 관련해서 필요한 기본적인 모듈을 자동으로 설치해주고, 필요한 모듈들이 설치가 완료되면 parcel이 내용을 컴파일/번들을 해서 화면에 띄울 수 있는 형태로 만들어주게 된다.  
+		CLI에서 제공된 localhost 주소로 접근하면 우리가 실행시킨 파일을 볼 수 있다.    
 
-
-	https://2donny-world.tistory.com/13
-	https://junhobaik.github.io/parcel-start/
-
-<br>
-<br>
-
-## Webpack 
+		📌 이런식으로 우리는 parcel을 이용해서 CSS가 아닌 SASS 문법으로 파일을 작성해도 바로 실행을 할 수가 있게 된다.
 
 <br>
 <br>
@@ -94,6 +96,7 @@ WebPack의 경우는 일반적으로 많은 설정이 필요하고 이를 구성
 ---
 <details>
 <summary>CLICK ME!</summary>
+
 - cf.  
 	- https://ideveloper2.tistory.com/166
 	- https://developer-alle.tistory.com/297
@@ -102,7 +105,12 @@ WebPack의 경우는 일반적으로 많은 설정이 필요하고 이를 구성
 	- https://rumor1993.tistory.com/57
 	- https://ko.parceljs.org/
 	- https://heropy.blog/2018/01/20/parcel-1-start/
-	-
+	- https://geonlee.tistory.com/103
+	- https://elegantcoder.com/beginning-npm-package/
+	- https://oddcode.tistory.com/70     
+		(vs code에서 sass 컴파일 하는 방법)
+	- https://2donny-world.tistory.com/13
+	- https://junhobaik.github.io/parcel-start/
 
 </details>
 
