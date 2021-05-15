@@ -82,7 +82,7 @@ date: 2021-05-14-Friday
 		-	Mixin
 		- Extend/Inheritance    
 		SASS의 위와 같은 추가 기능과 도구들은 CSS보다 간략하게 표기하는 것이 가능케 하기 때문에 CSS를 <u>구조화</u>하여 표현할 수 있게 한다. 특히 CSS에는 존재하지 않는 Mixin이라는 강력한 기능을 활용하면 CSS 유지보수 편의성을 증폭시킬 수 있다. 
-- 그렇다면 SASS와 SCSS의 <u>>차이점</u>은? 
+- 그렇다면 SASS와 SCSS의 <u>차이점</u>은? 
 	- **SCSS**는 <u>Sassy CSS(멋진 CSS)</u>의 줄임말이고 **SASS**는 <u>Syntactically Awesome Style Sheets (문법적으로 완전 ~~짱~~ 멋진 스타일시트)</u>의 줄임말이다. 둘 다 "멋진 스타일 시트"란 말인데 어떤 차이가 있을까?
 		-	위의 예시를 통해 대략적인/외관적인 차이는 확인하였겠지만, 간단히 말하면 **SASS보다 SCSS가 후에 등장했고, 여러가지 문법의 차이가 있지만 SCSS가 더 넓은 범용성과 CSS의 호환성 등의 장점으로 <u>SCSS의 사용을 권장하고 있다</u>.** 
 		- 또한 SASS의 공식 문법도 SCSS를 기준으로 작성 되어있기 때문에, SASS가 모든 CSS 버전과 완전히 호환되기 위해서는 SCSS문법 사용이 전제되어야 한다.    
