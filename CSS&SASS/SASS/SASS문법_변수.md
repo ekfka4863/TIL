@@ -104,30 +104,71 @@ date: 2021-05-15-Saturday
 <br>
 
 ## 변수의 초깃값 설정 (!default)
-- 현재 설정한 변수의 값을 사용하지 않겠다는 의미다.  
-		- `!default` 플래그는 변수의 초깃값을 설정한다.   
-		예를 들어, 외부 라이브러리를 연결했더니 변수 이름이 이미 작성한 변수 이름과 겹친다고 가정해보자. 이럴 경우 해당 변수는 값이 덮어쓰기 되어 문제가 생기게 된다. 이 때 라이브러리의 변수 뒤에 !default 플래그가 있다면 기존 값을 사용할 수 있게 된다.   
-		~~(cf. 플래그(flag)란 프로그래밍에서 '무엇인가를 기억해야하거나 또는 다른 프로그램에게 약속된 신호를 남기기 위한 용도로 프로그램에 의해 사용되는 미리 정의된 메세지 같은 것이다.')~~
-		
+- `!default` 플래그는 할당되지 않은 변수의 초깃값을 설정한다.   
+즉, 만약 이미 해당 변수에 할당되어있는 값이 있다면 기존의 할당 값을 사용하게끔 만들어 주는 아이가 `!default` 플래그라는 의미다. 
+예를 들어;
 ```scss
+	$color-primary: red;    // 이미 할당값이 있는 변수 $color-primary가 있고
 
+	.box {
+		$color-primary: blue !default;  // 다시 새로운 값을 할당해도 !default 플래그가 있기 때문에 ... 
+		background: $color-primary;
+	}
+	// 위의 SCSS 코드를 CSS로 변환하면 아래와 같아진다;
 ```
 ```css
-
+	.box {
+		background: red;
+	}
+	/* 즉, 이미 변수의 값이 덮어쓰기 되지 않는다. */
 ```
+- !default 플래그가 유용할 경우:
+  - ~~예를 들어, 외부 라이브러리(e.g. Bootstrap)를 연결했더니 변수 이름이 이미 작성한 변수 이름과 겹친다고 가정했을 때,~~ 변수 값이 덮어쓰기(Overwrite) 되어 문제가 생기지 않게 방지하는 역할을 한다.   
+	- 또는 '변수와 값을 설정하겠지만, 혹시 기존 변수가 있을 경우는 현재 설정하는 변수의 값은 사용하지 않겠다'는 의미로 쓸 수 있다.  
+
+	_(cf. 플래그(flag)란 프로그래밍에서 '무엇인가를 기억해야하거나 또는 다른 프로그램에게 약속된 신호를 남기기 위한 용도로 프로그램에 의해 사용되는 미리 정의된 메세지 같은 것이다.')_
 
 <br>
 <br>
 
 ## 변수의 문자 보간 (#{}) 
+- `#{}`를 이용해서 코드의 어디든지 변수 값을 넣을 수 있다.   
+예를 들어, 우리가 어떤 문자열을 입력한 건데, 그 문자열의 부분 부분에 변수의 내용을 입력하고 싶다고 가정해보자.   
+이럴 경우 문자 보간은 아래와 같이 사용하면 된다;  
 ```scss
+	$family: unquote("Droid+Sans");  // 변수 $family 에 "Droid+Sans"를 넣어주고 ... 
+	// cf. 이때, Sass의 내장 함수 unquote()는 문자에서 따옴표를 제거하는 역할로 사용됨.
 
+	@import url("http://fonts.googleapis.com/css?family=#{$family}");   // #{} 안에 변수 $family를 넣어주면...
 ```
 ```css
+	@import url("http://fonts.googleapis.com/css?family=Droid+Sans");  /* CSS로 변환될 때는 이렇게! */
+```
+- 응용 예시 2.   
+```scss
+	@mixin box($position, $width, $color) {
+		border-#{$position}: $width solid $color;
+	}
 
+	div{
+		@include box(left, 2px, blue);
+	}
+	p{
+		@include box(bottom, 1px, red);
+	}
+```
+```css
+	/* CSS에서는 아래처럼 나타난다 */
+	div {
+		border-left: 2px solid blue;
+	}
+
+	p {
+		border-bottom: 1px solid red;
+	}
 ```
 
-<br>
+<!-- <br>
 <hr>
 <br>
 
@@ -147,15 +188,9 @@ date: 2021-05-15-Saturday
 		예를 들어, 외부 라이브러리를 연결했더니 변수 이름이 이미 작성한 변수 이름과 겹친다고 가정해보자. 이럴 경우 해당 변수는 값이 덮어쓰기 되어 문제가 생기게 된다. 이 때 라이브러리의 변수 뒤에 !default 플래그가 있다면 기존 값을 사용할 수 있게 된다.   
 		~~(cf. 플래그(flag)란 프로그래밍에서 '무엇인가를 기억해야하거나 또는 다른 프로그램에게 약속된 신호를 남기기 위한 용도로 프로그램에 의해 사용되는 미리 정의된 메세지 같은 것이다.')~~
 	5. 문자 보간   
-		- `#{}`
-
+		- `#{}` -->
 
 <br>
-<br>
-
-```scss
-
-```
 
 ---
 
@@ -168,12 +203,7 @@ date: 2021-05-15-Saturday
 	(프로그래밍에서 플래그란? - 1)
 	- http://www.terms.co.kr/flag.htm    
 	(프로그래밍에서 플래그란? - 2)
-	- 
-	- 
-	- 
-	- 
-
-
+	- https://haeeeell.tistory.com/7
 
 </details>
 
