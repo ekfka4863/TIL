@@ -78,8 +78,8 @@ List 데이터를 반복해보자;
 
 	.fruits {
 		@each $fruit in $fruits {
-			li.#{$fruit} {
-				background: url("/images/#{$fruit}.png");
+			li.#{$fruit} {          // li. 뒤에 붙는 과일이름은 매번 달라질 것. 반복문에 의해...
+				background: url("/images/#{$fruit}.png");  // img의 url도 #{문자보간}에 각 $fruit에 해당하는 부분이 들어가기 때문에 매번 달라진다.
 			}
 		}
 	}
@@ -104,16 +104,18 @@ List 데이터를 반복해보자;
 <br>
 
 💡 Tip!
-- 혹시 매번 반복마다 index 값이 필요하다면 아래와 같이 `index()`라는 내장 함수를 사용할 수 있다;   
+- 혹시 반복문에서 index 값이 필요하다면 아래와 같이 `index()`라는 내장 함수를 사용할 수 있다;     
+~~(예를 들어, 배열 $fruits에는 인덱스가 없지만 반복문을 돌릴 때, 변수 $i를 정의한 뒤, index() 라는 내장함수를 통해서 현재 반복하는 구간이 몇번째 반복하고 있는 구간인지를 알아내는데 사용할 수 있다.)~~ 
 - e.g.2   
 ```scss
 	$fruits: (apple, orange, banana, mango);
 
 	.fruits {
 		@each $fruit in $fruits {
-			$i: index($fruits, $fruit);    // index() 내장 함수 사용 
-			li:nth-child(#{$i}) {
+			$i: index($fruits, $fruit);    // index() 내장 함수 사용. 첫 번째 인수는 list data 전체를 입력하고, 두 번째 인수로는 우리가 이 list data에서 반환하고 싶은 index에 해당하는 value를 적어준다... 이 경우는 $fruit
+			li:nth-child(#{$i}) {    // #{} 문자보간 꼭 기억할 것~!
 				left: 50px * $i;
+				background: url("images/#{$fruit}.png");
 			}
 		}
 	}
@@ -124,15 +126,19 @@ List 데이터를 반복해보자;
 
 	.fruits li:nth-child(1) {
 		left: 50px;
+		background: url("images/apple.png");
 	}
 	.fruits li:nth-child(2) {
 		left: 100px;
+		background: url("images/orange.png");
 	}
 	.fruits li:nth-child(3) {
 		left: 150px;
+		background: url("images/banana.png");
 	}
 	.fruits li:nth-child(4) {
 		left: 200px;
+		background: url("images/mango.png");
 	}
 ```
 
@@ -173,7 +179,7 @@ List 데이터를 반복해보자;
 <br>
 
 💡 Tip!
-- Map 데이터를 반복할 경우 하나의 데이터에 두 개의 변수가 필요하다.   
+- Map 데이터 ~~(cf. 괄호 안에 (key: value,)의 형태)~~ 를 반복할 경우 하나의 데이터에 두 개의 변수가 필요하다.   
 아래와 같이; 
 ```scss
 	@each $key변수, $value변수 in 데이터 {
@@ -190,9 +196,14 @@ List 데이터를 반복해보자;
 		banana: japan
 	);
 
-	@each $fruit, $country in $fruits-data {
-		.box-#{$fruit} {
-			background: url("/images/#{$country}.png");
+	@each $fruit, $country in $fruits-data {    // $fruits-data는 map 데이터. key: value 로 이루어져 있는데, key를 받을 변수 하나 그리고 value를 받을 변수 하나. 이렇게 각각의 변수가 총 2개($fruit, $country) 필요하다.  
+		$fruits-data--key-list: map-keys($fruits-data);
+		// $fruits-data--value-list: map-values($fruits-data);
+		$index : index($fruits-data--key-list, $fruit); 
+		.box-#{$fruit} {         // .box- 라는 접두사가 붙고, 그 뒤에 #{}문자 보간을 통해서 변수에 오는 값들에 따라 값이 달라지게 한다.
+			width: $index;     // tip! map data와 index(), map-keys()...등의 내장 함수를 이용해서 index를 추출 및 사용할 수 있다.
+			height: 100px * $index;
+			background: url("/images/#{$country}.png");   // 여기도 마찬가지로 #{}로 변수 $country가 받는 값에 따라 달라진다...
 		}
 	}
 ```
@@ -201,12 +212,20 @@ List 데이터를 반복해보자;
 	/* 위의 SCSS 코드를 CSS로 컴파일 하면 아래와 같다; */
 
 	.box-apple {
+		width: 1;
+		height: 100px;
 		background: url("/images/korea.png");
 	}
+
 	.box-orange {
+		width: 2;
+		height: 200px;
 		background: url("/images/china.png");
 	}
+
 	.box-banana {
+		width: 3;
+		height: 300px;
 		background: url("/images/japan.png");
 	}
 ```
@@ -216,7 +235,8 @@ List 데이터를 반복해보자;
 
 ## @while (지시어)  
 - `@while`은 조건이 `false`로 평가될 때까지 내용을 반복한다.    
-자바스크립트의 while 문과 유사하게 잘못된 조건으로 인해 컴파일 중 무한 루프에 빠질 수 있다는 단점이 있다. 또한 그렇기 때문에 사용을 권장하지 않는다.
+자바스크립트의 while 문과 유사하게 잘못된 조건으로 인해 컴파일 중 무한 루프에 빠질 수 있다는 단점이 있다. 또한 그렇기 때문에 사용을 권장하지 않는다.   
+💡 (cf. while 문은 for 또는 each 로 대체가 가능하니, 되도록이면 사용하지 않을 것!)
 - `@while` 기본 사용법;
 ```scss
 	@while 조건 {
