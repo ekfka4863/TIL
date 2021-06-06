@@ -333,19 +333,108 @@ date: 2021-04-20-Tuesday ~ 2021-04-22-Thursday
 	/*  hello3 undefined
 	설명: 화살표 함수는 this 가 바인딩 되지 앉기 때문에 위의 hello1과 hello2과는 다르게 this.name에 할당된 값이 출력되는 것이 아니라 undefined가 출력되는 것이다. */
 ```
-<!-- - ES6부터 도입된 객체 리터럴 방식을 사용하면 아래와 같은 기능 가능; 
-	- <u>첫째</u>, 프로퍼티 key에 계산식 사용 가능 
-	- <u>둘째</u>, 변수만으로 프로퍼티/메서드 생성 가능
-	- <u>셋째</u>, 메서드 생성 방식 간소화 가능 
-https://curryyou.tistory.com/191
 
-https://velog.io/@jimmyjoo/자바스크립트-객체리터럴 
+<br>
+
+> 객체 리터럴 사용 기능들 
+- ES6부터 도입된 객체 리터럴 방식을 사용하면 아래와 같은 기능 가능; 
+	- <u>1. 첫째</u>, 프로퍼티 key에 계산식 사용 가능 
+	- <u>2. 둘째</u>, 변수만으로 프로퍼티/메서드 생성 가능
+	- <u>3. 셋째</u>, 메서드 생성 방식 간소화 가능    
+	
+- 1. 프로퍼티 key에 계산식 사용  
+	- 객체 내부에서 프로퍼티의 key를 [계산식] 로 사용할 수 있다.
+	- e.g.    
+	```javascript
+	const num_01 = 1;
+	const num_02 = 2;
+	const strHello = 'hello';
+
+	const newObj = { 
+		[1 + 1]: 'first',    // 첫번째 key값으로 사용된 [1 + 1]  은 '2'로 사용된다.
+		[num_01 + num_02]: 'second',   // 두번째 [num_01 + num_02]는 1+2가 되어 '3'으로 사용된다.
+		[strHello + num_01]: num_02,  // 세번째 [strHello + num_01]은 'hello' + '1'이 되어 'hello1'로 사용된다(자동 형변환)
+		[`${strHello} - ${num_01 + num_02}`]: 'fourth' // 네번째 [`${strHello} - ${num_01 + num_02}`] 은 '템플릿 리터럴' 방식을 사용한 것으로 'hello - 3'가 key가 된다. 
+	};
+	```
+- 2. 변수만으로 프로퍼티/메서드 생성
+	- 변수의 이름과 값을 프로퍼티의 key, value로 사용할 경우, 그냥 변수만 넣어주면 된다.
+	- e.g.    
+	```javascript
+	// ES6 이전 코드/ 기존 코드 
+	// -> 기존에는 객체 생성시, 프로퍼티의 key와 value를 명시적으로 선언해 주어야 했다.
+
+	// (기존방식)'key':value 선언 필요 
+	const x = 10; 
+	const y = 20; 
+	const hello = function() {
+		return 'hello';
+	}; 
+	
+	const exObj = { 
+		'x' : x,             // 'x'는 key, x는 value 
+		'y' : y, 
+		'hello' : hello 
+	}; 
+
+	console.log(exObj);   // { x: 10, y: 20, hello: [Function: hello] }
+
+	// -------------------------- //
+
+	// ES6+ 코드 
+	// -> 변수를 그대로 프로퍼티로 만들 경우, 변수만 지정해주면 된다.
+
+	//(ES6) 변수만으로 프로퍼티 생성 
+	const x = 10; 
+	const y = 20; 
+	const hello = function() {
+		return 'hello';
+	}; 
+	
+	const newObj = { 
+		x,           // 프로퍼티 
+		y,           // 프로퍼티 
+		hello        // 메서드 
+	}; 
+
+	console.log(newObj);   // { x: 10, y: 20, hello: [Function: hello] }
+
+	```
+
+- 3. 메서드 생성 방식 간소화 가능
+	- ES6부터 객체의 메서드 생성시, key값과 function 키워드를 생략할 수 있다.
+	- e.g.    
+		```javascript
+		// ES6 이전 코드/ 기존 코드 
+		// -> 'key:value' 구조로 function 키워드 사용
+
+		//(기존) key:value구조, function키워드 사용 
+		const exObj = { 
+			hello : function() { 
+				return `Hello World!`
+			} 
+		};
+		// 즉, 메서드 생성 시, "key: function( ... ){ ... }" 방식을 사용하고 있다.
 
 
-미완성
+		// -------------------------- //
 
--->
-<!-- https://meetup.toast.com/posts/104 -->
+		// ES6+ 코드 
+		// -> key생략, function키워드 생략
+
+		// (ES6) key생략, function키워드 생략 
+		const newObj = { 
+			hello() {
+				return `Hello World!`;
+			} 
+		}; 
+		
+		console.log(newObj);    // { hello: [Function: hello] }
+		//즉, 군더더기 없이, "메서드명( ... ){ ... }" 방식으로 메서드를 생성하고 았다.
+		```   
+	- 더 많은 내용이 궁금하다면 [링크 클릭!](https://curryyou.tistory.com/191)!
+
+
 <br>
 <br>
 
@@ -382,17 +471,126 @@ https://velog.io/@jimmyjoo/자바스크립트-객체리터럴
 	console.log(Array.prototype.slice, Object.prototype.slice);     // 출력 결과: [Function: slice] undefined  --> 앞에 배열의 프로토타입에는 slice가 있는데, 뒤에 Object의 프로토타입에는 slice가 define 되지 않았다고 하는 이유는,프로토타입 체인 상 Object에 있는 것이 아니라, Object를 프로토타입 체인으로 받아온 Array가 따로 추가한 함수이기 때문이다.
 ```
 
+<br>
+<br>
 
+## 객체 속성 읽기, 추가, 변경, 삭제 
 
-```javascript
-```
-```javascript
-```
-```javascript
-```
----
-```javascript
-```
+<br>
+
+> 객체 속성 읽기 
+- 객체 속성 값을 읽는 방법은 `1. 점 표기법(dot notation)`과 `2. 대괄호 표기법(square bracket notation) 2가지가 있다.
+- 1. 점 표기법  
+	- e.g. 
+	```javascript
+		// 객체 obj 가 있다... 속성을 읽어보자... 
+		const obj = {
+			id : 123,
+			product : {
+				type: 'book',
+				title: 'JS Start',
+				page: 200
+			}
+		};
+
+		document.write(obj.id);
+		document.write(obj.product.type);
+		document.write(obj.product.title);
+		document.write(obj.product.page);
+	```
+- 2. 대괄호 표기법 
+	- e.g. 
+	```javascript
+		// 객체 obj 가 있다... 속성을 읽어보자... 
+		const obj = {
+			id : 123,
+			product : {
+				'product type': 'book',
+				title: 'JS Start',
+				page: 200
+			}
+		};
+
+		document.write(obj['id']);
+		document.write(obj.product['product type']);
+		document.write(obj['product']['title']);   // 대괄호 표기법 두번 사용
+		document.write(obj['product'].page);  // 대괄호 표기법이랑 점 표기법 혼용
+	```
+> 객체 속성 추가 및 변경  
+- 1. 점 표기법
+	- e.g. 
+	```javascript
+		const obj = {
+			id : 123,
+			product : {
+				'product type': 'book',
+				title: 'JS Start',
+				page: 200
+			}
+		};
+
+		// 속성 추가
+		obj.stock = 100;
+		// document.write(obj.stock);
+		console.log(obj);  //  obj = {id: 123, product: { 'product type': 'book', title: 'JS Start', page: 200 }, stock: 100}
+
+		// 속성 값 변경
+		obj.id = 456;
+		// document.write(obj.id);
+		console.log(obj);  //  obj = {id: 456, product: { 'product type': 'book', title: 'JS Start', page: 200 }, stock: 100}
+	```
+- 2. 대괄효 표기법 
+	- e.g. 
+	```javascript
+		const obj = {
+			id : 123,
+			product : {
+				'product type': 'book',
+				title: 'JS Start',
+				page: 200
+			}
+		};
+
+		// 속성 추가
+		obj['stock'] = 100;
+		// document.write(obj.stock);
+		console.log(obj.stock);    // 100
+
+		// 속성 값 변경
+		obj['id'] = 456;
+		// document.write(obj.id);
+		console.log(obj.id);      //  456
+	```
+
+<br>
+
+> 객체 속성 삭제 
+- 객체의 속성을 삭제할 때는 `delete 연산자`를 사용한다;
+	- e.g. 
+	```javascript
+		const obj = {
+			id : 123,
+			product : {
+				'product type': 'book',
+				title: 'JS Start',
+				page: 200
+			}
+		};
+
+		// 속성 삭제
+		delete obj.id;    // id 값 지우기 
+		delete obj.product['product type'];  // product안에 product type 지우기 
+
+		console.log(obj);    // { product: { title: 'JS Start', page: 200 } }
+		console.log(Object.keys(obj));             // [ 'product' ]
+		console.log(Object.keys(obj).length);      // 1
+		console.log(obj.id);                       // undefined
+		console.log(obj.product['product type']);  // undefined
+	```
+
+<br>
+<br>
+
 ---
 <details>
 <summary>CLICK ME!</summary>
@@ -404,15 +602,8 @@ https://velog.io/@jimmyjoo/자바스크립트-객체리터럴
 	- https://curryyou.tistory.com/191
 	- https://ko.javascript.info/constructor-new
 	- https://gent.tistory.com/294
-	-
-	-
-	-
-	-
-	-
-	-
-
+	- https://hianna.tistory.com/453
 
 </details>
-
 
 ---
