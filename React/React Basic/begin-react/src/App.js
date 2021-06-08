@@ -156,9 +156,15 @@
 
 
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useMemo } from 'react';   // useMemo 
 import UserList from './UserList';
 import CreateUser from './CreateUser';
+
+// 활성 사용자 수를 카운트 하는 함수를 만든다 ... 
+function countActiveUsers(users){      // users 배열을 파라미터로 넣어준다 
+  console.log("활성 사용자 수를 세는 중입니다...");
+  return users.filter(user => user.active).length; 
+}
 
 function App() {
   const [inputs, setInputs] = useState({
@@ -222,6 +228,10 @@ function App() {
       )
     );
   };
+
+  const count = useMemo(() => countActiveUsers(users), [users]);  // useMemo로 countActiveUsers(users) 함수를 감싼 뒤, 두 번째 파라미터로 deps인 [users]를 넣어준다 
+
+
   return (
     <>
       <CreateUser
@@ -231,6 +241,7 @@ function App() {
         onCreate={onCreate}
       />
       <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
+      <div>활성 사용자 수: {count}</div>
     </>
   );
 }
