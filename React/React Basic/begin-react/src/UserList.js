@@ -151,9 +151,155 @@
 
 
 // ----------------------------- //
-import React from 'react';
+// import React from 'react';
+
+// function User({ user, onRemove, onToggle }) {
+//   return (
+//     <div>
+//       <b
+//         style={{
+//           cursor: 'pointer',
+//           color: user.active ? 'green' : 'black'
+//         }}
+//         onClick={() => onToggle(user.id)}
+//       >
+//         {user.username}
+//       </b>
+//       &nbsp;
+//       <span>({user.email})</span>
+//       <button onClick={() => onRemove(user.id)}>삭제</button>
+//     </div>
+//   );
+// }
+
+// function UserList({ users, onRemove, onToggle }) {
+//   return (
+//     <div>
+//       {users.map(user => (
+//         <User
+//           user={user}
+//           key={user.id}
+//           onRemove={onRemove}
+//           onToggle={onToggle}
+//         />
+//       ))}
+//     </div>
+//   );
+// }
+
+// export default UserList;
+
+
+
+// ----------------------------- //
+
+
+
+// import React, { useEffect } from 'react';    // useEffect
+
+// function User({user, onRemove, onToggle}) {
+// 	useEffect(() => {                         // useEffect
+// 		console.log('컴포넌트가 화면에 나타났습니다');  // 마운트 될 때 
+// 		return () => {
+// 			console.log('컴포넌트가 화면에서 사라졌습니다');  // 언마운트 될 때
+// 		};
+// 	}, []);      // cf. 배열 [] 안에다가는 의존되는 값들(dependency)을 넣어주는데, 만약에 그 값들이 비어있다면 컴포넌트가 처음 화면에 나타날 때만 실행이 된다 
+
+// 	return (
+//     <div>
+//       <b
+//         style={{
+//           cursor: 'pointer',
+//           color: user.active ? 'green' : 'black'
+//         }}
+//         onClick={() => onToggle(user.id)}
+//       >
+//         {user.username}
+//       </b>
+//       &nbsp;
+//       <span>({user.email})</span>
+//       <button onClick={() => onRemove(user.id)}>삭제</button>
+//     </div>
+//   );
+// }
+
+// function UserList({users, onRemove, onToggle}) {
+// return (
+//     <div>
+//       {users.map(user => (
+//         <User
+//           user={user}
+//           key={user.id}
+//           onRemove={onRemove}
+//           onToggle={onToggle}
+//         />
+//       ))}
+//     </div>
+//   );
+// }
+
+// export default UserList;
+
+// ----------------------------- //
+
+
+// import React, { useEffect } from 'react';
+
+// function User({ user, onRemove, onToggle }) {
+//   useEffect(() => {
+//     console.log('user 값이 설정되었습니다');
+//     console.log(user);
+//     return () => {
+//       console.log('user 가 바뀌기 전입니다...');
+//       console.log(user);
+//     };
+//   }, [user]);     // -> deps 에 user 라는 값을 넣어줌!! 
+//   return (
+//     <div>
+//       <b
+//         style={{
+//           cursor: 'pointer',
+//           color: user.active ? 'green' : 'black'
+//         }}
+//         onClick={() => onToggle(user.id)}
+//       >
+//         {user.username}
+//       </b>
+//       &nbsp;
+//       <span>({user.email})</span>
+//       <button onClick={() => onRemove(user.id)}>삭제</button>
+//     </div>
+//   );
+// }
+
+
+// function UserList({ users, onRemove, onToggle }) {
+//   return (
+//     <div>
+//       {users.map(user => (
+//         <User
+//           user={user}
+//           key={user.id}
+//           onRemove={onRemove}
+//           onToggle={onToggle}
+//         />
+//       ))}
+//     </div>
+//   );
+// }
+
+// export default UserList;
+
+
+// ----------------------------- //
+
+
+import React, { useEffect } from 'react';
 
 function User({ user, onRemove, onToggle }) {
+  useEffect(() => {
+    console.log(user);
+  });
   return (
     <div>
       <b
@@ -172,6 +318,7 @@ function User({ user, onRemove, onToggle }) {
   );
 }
 
+
 function UserList({ users, onRemove, onToggle }) {
   return (
     <div>
@@ -187,10 +334,14 @@ function UserList({ users, onRemove, onToggle }) {
   );
 }
 
+
 export default UserList;
 
 
+// ----------------------------- //
 
 
 
 
+
+// ----------------------------- //
