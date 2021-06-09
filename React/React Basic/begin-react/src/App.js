@@ -156,31 +156,128 @@
 
 
 
-import React, { useRef, useState, useMemo } from 'react';   // useMemo 
+// import React, { useRef, useState, useMemo } from 'react';   // useMemo 
+// import UserList from './UserList';
+// import CreateUser from './CreateUser';
+
+// // 활성 사용자 수를 카운트 하는 함수를 만든다 ... 
+// function countActiveUsers(users){      // users 배열을 파라미터로 넣어준다 
+//   console.log("활성 사용자 수를 세는 중입니다...");
+//   return users.filter(user => user.active).length; 
+// }
+
+// function App() {
+//   const [inputs, setInputs] = useState({
+//     username: '',
+//     email: ''
+//   });
+//   const { username, email } = inputs;
+//   const onChange = e => {
+//     const { name, value } = e.target;
+//     setInputs({
+//       ...inputs,
+//       [name]: value
+//     });
+//   };
+//   const [users, setUsers] = useState([
+//     {
+//       id: 1,
+//       username: 'velopert',
+//       email: 'public.velopert@gmail.com',
+//       active: true
+//     },
+//     {
+//       id: 2,
+//       username: 'tester',
+//       email: 'tester@example.com',
+//       active: false
+//     },
+//     {
+//       id: 3,
+//       username: 'liz',
+//       email: 'liz@example.com',
+//       active: false
+//     }
+//   ]);
+
+//   const nextId = useRef(4);
+//   const onCreate = () => {
+//     const user = {
+//       id: nextId.current,
+//       username,
+//       email
+//     };
+//     setUsers(users.concat(user));
+
+//     setInputs({
+//       username: '',
+//       email: ''
+//     });
+//     nextId.current += 1;
+//   };
+
+//   const onRemove = id => {
+//     // user.id 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
+//     // = user.id 가 id 인 것을 제거함
+//     setUsers(users.filter(user => user.id !== id));
+//   };
+//   const onToggle = id => {
+//     setUsers(
+//       users.map(user =>
+//         user.id === id ? { ...user, active: !user.active } : user
+//       )
+//     );
+//   };
+
+//   const count = useMemo(() => countActiveUsers(users), [users]);  // useMemo로 countActiveUsers(users) 함수를 감싼 뒤, 두 번째 파라미터로 deps인 [users]를 넣어준다 
+
+
+//   return (
+//     <>
+//       <CreateUser
+//         username={username}
+//         email={email}
+//         onChange={onChange}
+//         onCreate={onCreate}
+//       />
+//       <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
+//       <div>활성 사용자 수: {count}</div>
+//     </>
+//   );
+// }
+
+// export default App;
+
+
+// -------------------------------- //
+
+// import React from 'react';
+import React, { useRef, useState, useMemo, useCallback } from 'react';     // useRef, useState, useMemo, useCallback 
 import UserList from './UserList';
 import CreateUser from './CreateUser';
 
-// 활성 사용자 수를 카운트 하는 함수를 만든다 ... 
-function countActiveUsers(users){      // users 배열을 파라미터로 넣어준다 
-  console.log("활성 사용자 수를 세는 중입니다...");
-  return users.filter(user => user.active).length; 
+function countActiveUsers(users) {
+	console.log('활성 사용자 수를 세는 중입니다...');
+	return users.filter(user => user.active).length;   // user.active가 true인 것들을 모아 배열을 만들고, 그 배열의 length를 return해준다
 }
 
 function App() {
-  const [inputs, setInputs] = useState({
-    username: '',
-    email: ''
-  });
-  const { username, email } = inputs;
-  const onChange = e => {
-    const { name, value } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value
-    });
-  };
-  const [users, setUsers] = useState([
-    {
+	const [inputs, setInputs] = useState({
+		username: '',
+		email: ''
+	});
+	const {username, email} = inputs;
+	const onChange = useCallback(
+		e => {
+			const {name, value} = e.target;
+			setInputs({
+				...inputs,
+				[name]: value
+			});
+		}, [inputs]
+	);
+	const [users, setUsers] = useState([
+		{
       id: 1,
       username: 'velopert',
       email: 'public.velopert@gmail.com',
@@ -198,10 +295,9 @@ function App() {
       email: 'liz@example.com',
       active: false
     }
-  ]);
-
-  const nextId = useRef(4);
-  const onCreate = () => {
+	]);
+const nextId = useRef(4);
+  const onCreate = useCallback(() => {
     const user = {
       id: nextId.current,
       username,
@@ -214,24 +310,29 @@ function App() {
       email: ''
     });
     nextId.current += 1;
-  };
+  }, [users, username, email]);
 
-  const onRemove = id => {
-    // user.id 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
-    // = user.id 가 id 인 것을 제거함
-    setUsers(users.filter(user => user.id !== id));
-  };
-  const onToggle = id => {
-    setUsers(
-      users.map(user =>
-        user.id === id ? { ...user, active: !user.active } : user
-      )
-    );
-  };
+  const onRemove = useCallback(
+    id => {
+      // user.id 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
+      // = user.id 가 id 인 것을 제거함
+      setUsers(users.filter(user => user.id !== id));
+    },
+    [users]
+  );
+  const onToggle = useCallback(
+    id => {
+      setUsers(
+        users.map(user =>
+          user.id === id ? { ...user, active: !user.active } : user
+        )
+      );
+    },
+    [users]
+  );
 
-  const count = useMemo(() => countActiveUsers(users), [users]);  // useMemo로 countActiveUsers(users) 함수를 감싼 뒤, 두 번째 파라미터로 deps인 [users]를 넣어준다 
-
-
+  const count = useMemo(() => countActiveUsers(users), [users]);
+  
   return (
     <>
       <CreateUser
@@ -241,12 +342,11 @@ function App() {
         onCreate={onCreate}
       />
       <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
-      <div>활성 사용자 수: {count}</div>
+      <div>활성사용자 수 : {count}</div>
     </>
   );
 }
 
 export default App;
-
 
 // -------------------------------- //

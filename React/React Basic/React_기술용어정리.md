@@ -12,7 +12,8 @@ https://velog.io/@jengyoung/React-%EA%B8%B0%EC%B4%88-React-%EA%B4%80%EB%A0%A8-%E
 https://ijw9209.github.io/react/react-term/
 https://m.post.naver.com/viewer/postView.nhn?volumeNo=6638748&memberNo=14320
 
-> 
+> 관련용어: CSR(Client Side Rendering) vs SSR(Server Side Rendering)
+- cf. https://www.youtube.com/watch?v=5W72UHb-9iI
 
 
 <br>
@@ -46,7 +47,7 @@ e.g.
 	<summary>CLICK ME!</summary>
 
 - cf. 
-	- 
+	- https://www.youtube.com/watch?v=5W72UHb-9iI
 	- 
 	- 
 	- 	
