@@ -344,8 +344,9 @@
 
 import React from 'react';
 
-function User({ user, onRemove, onToggle }) {
-  
+// function User({ user, onRemove, onToggle }) {
+const User = React.memo(function User({ user, onRemove, onToggle }) {   // React.memo로 function User 전체를 감싸준다 
+
   return (
     <div>
       <b
@@ -362,7 +363,7 @@ function User({ user, onRemove, onToggle }) {
       <button onClick={() => onRemove(user.id)}>삭제</button>
     </div>
   );
-}
+});    
 
 
 function UserList({ users, onRemove, onToggle }) {
