@@ -340,12 +340,63 @@
 
 // ----------------------------- //
 
+// import React, { useContext } from 'react';   // useContext 사용 -> dispatch로 onToggle이랑 onRemove 바로 설정해주기!
+// import {UserDispatch} form './App';          // App.js에서 작성하고 내보낸 UserDispatch을 불러오겠다란 의미 
+
+// // function User({ user, onRemove, onToggle }) {
+// // const User = React.memo(function User({ user, onRemove, onToggle }) {   // React.memo로 function User 전체를 감싸준다 
+
+// const User = React.memo(function User({ user }) {   // React.memo로 function User 전체를 감싸준다 
+//   const {username, email, id, active} = user; 
+//   const dispatch = useContext();   // App.js 에서 만들고 내보내준 UserDispatch를 Context로 ~ 
+
+//   return (
+//     <div>
+//       <b
+//         style={{
+//           cursor: 'pointer',
+//           color: user.active ? 'green' : 'black'
+//         }}
+//         onClick={() => onToggle(user.id)}
+//       >
+//         {user.username}
+//       </b>
+//       &nbsp;
+//       <span>({user.email})</span>
+//       <button onClick={() => onRemove(user.id)}>삭제</button>
+//     </div>
+//   );
+// });    
 
 
-import React from 'react';
+// // function UserList({ users, onRemove, onToggle }) {
+// function UserList({ users }) {
+//   return (
+//     <div>
+//       {users.map(user => (
+//         <User
+//           user={user}
+//           key={user.id}
+//           // onRemove={onRemove}
+//           // onToggle={onToggle}
+//         />
+//       ))}
+//     </div>
+//   );
+// }
 
-// function User({ user, onRemove, onToggle }) {
-const User = React.memo(function User({ user, onRemove, onToggle }) {   // React.memo로 function User 전체를 감싸준다 
+
+// export default UserList;
+
+
+
+// ----------------------------- //
+
+import React, { useContext } from 'react';
+import { UserDispatch } from './App';
+
+const User = React.memo(function User({ user }) {
+  const dispatch = useContext(UserDispatch);
 
   return (
     <div>
@@ -354,37 +405,36 @@ const User = React.memo(function User({ user, onRemove, onToggle }) {   // React
           cursor: 'pointer',
           color: user.active ? 'green' : 'black'
         }}
-        onClick={() => onToggle(user.id)}
+        onClick={() => {
+          dispatch({ type: 'TOGGLE_USER', id: user.id });
+        }}
       >
         {user.username}
       </b>
       &nbsp;
       <span>({user.email})</span>
-      <button onClick={() => onRemove(user.id)}>삭제</button>
+      <button
+        onClick={() => {
+          dispatch({ type: 'REMOVE_USER', id: user.id });
+        }}
+      >
+        삭제
+      </button>
     </div>
   );
-});    
+});
 
-
-function UserList({ users, onRemove, onToggle }) {
+function UserList({ users }) {
   return (
     <div>
       {users.map(user => (
-        <User
-          user={user}
-          key={user.id}
-          onRemove={onRemove}
-          onToggle={onToggle}
-        />
+        <User user={user} key={user.id} />
       ))}
     </div>
   );
 }
 
-
-export default UserList;
-
-
+export default React.memo(UserList);
 
 // ----------------------------- //
 
