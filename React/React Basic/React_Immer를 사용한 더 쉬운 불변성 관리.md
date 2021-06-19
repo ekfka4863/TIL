@@ -1,5 +1,5 @@
 ---
-date: 2021-06-13-Sunday
+date: 2021-06-13-Sunday, 2021-06-19-Saturday
 ---
 
 # Immer 를 사용한 더 쉬운 불변성 관리
@@ -72,58 +72,267 @@ e.g.
 
 > Immer
 
-- Immer은 Immutable과 같이 불변성을 유지를 편리하게 해 주는 라이브러리다.
-- 우선, Immer.js 를 설치해 준다;     
+- `Immer`은 Immutable과 같이 불변성을 유지를 편리하게 해 주는 라이브러리다.
+	- `Immer`를 사용하면 불변성을 해치는 코드를 작성해도 대신 불변성 유지를 해준다.   
+- 우선, Immer라는 라이브러리를 설치하고 사용법을 알아보자;   
+`begin-react` 디렉토리로 가서 아래와 같이 Immer 라이브러리를 설치한다          
 ```
 	$ yarn add immer
 	$ npm add immer 
-```
-- 사용 방법; 
+```    
+- 사용 방법;
+	- App.js 로 가서 App 컴포넌트 상단에서 Immer를 불러온다.    
+	보통 `produce`라는 이름으로 불러온다;        
+	```javascript
+		import React, { useRef, useReducer, useMemo, useCallback } from 'react';
+		import produce from 'immer';
 
-<!-- 여기부터 다시!!! 
-https://velog.io/@bedakim/%EB%B6%88%EB%B3%80%EC%84%B1 -->
+		window.produce = produce;   // 크롬에서 produce를 사용하기 위해 필요한 코드 
 
+		// 이하 코드 생략 ...
+
+		export default App;
+	```
+	- 그리고 `produce` 함수를 사용 할 때는 첫 번째 파라미터에는 <u>수정하고 싶은 상태</u>, 두 번째 파라미터에는 <u>어떻게 업데이트 하고 싶은지를 정의하는 함수</u>를 넣어준다.    
+	두 번째 파라미터에 넣는 함수에서는 불변성에 대해서 신경쓰지 않고 그냥 업데이트 해주면 Immer가 다 알아서 해준다.   
+	e.g.     
+	```javascript
+	// 예를 들어 state라는 객체를 하나 만들어 준다 
+		const state = {
+			number: 1,
+			dontChangeMe: 2
+		};
+
+	// 그리고 nextState라는 함수를 만든다 
+		const nextState = produce(state, draft => {    // 1. 수정하고 싶은 상태 & 2. 어떻게 업데이트 하고 싶은지를 정의하는 함수
+			draft.number += 1;      // draft를 참조하고, draft.number의 값에 +1 하면서 값을 업데이트 시킨다 
+		});
+
+		console.log(nextState);
+		// { number: 2, dontChangeMe: 2 }
+	```
+	- 다른 예시;    
+	e.g.2.     
+	```javascript
+	// array라는 객체 배열을 만들어 준다 
+		const array = [
+			{ id: 1, text: 'hello' }, 
+			{ id: 2, text: 'bye' }, 
+			{ id: 3, text: 'lalalala' }
+		];
+
+	// array라는 배열에 변화를 주는 함수를 정의한다 
+		const nextArray = produce(array, draft => {
+			draft.push({ id: 4, text: 'blahblah' });  // dfart(배열)에다가 push한다. 새로운 항목을 
+			draft[0].text = draft[0].text + 'World';  // 그리고 draft의 첫번째 항목의 text에다가 'World' 를 덧붙인다 
+		})
+
+		// 위와 같이 코드를 작성하면 nextArray라는 새로운 배열이 생겨나서 원래의 배열에는 아무런 변화가 생기지 않게된다.
+		// 이렇게 immer를 사용하면 불변성을 "쉽게" 유지할 수가 있게된다.
+	```
 
 <br>
-- e.g.    
+
+> 리듀서에서 Immer 사용하기
+- 이제 `App.js`에 가서 `function reducer() {}` 부분에서 Immer를 사용하는 방법을 살펴보자;    
+
+[App.js]     
+
 ```javascript
-	const object = {
-		a: 1,
-		b: 2
+	// 본래의 App.js 코드  
+
+	import React, { useRef, useReducer, useMemo, useCallback } from 'react';
+	import UserList from './UserList';
+	import CreateUser from './CreateUser';
+	import produce from 'immer';
+
+
+	function countActiveUsers(users) {
+		console.log('활성 사용자 수를 세는중...');
+		return users.filter(user => user.active).length;
+	}
+
+	const initialState = {
+		users: [
+			{
+				id: 1,
+				username: 'velopert',
+				email: 'public.velopert@gmail.com',
+				active: true
+			},
+			{
+				id: 2,
+				username: 'tester',
+				email: 'tester@example.com',
+				active: false
+			},
+			{
+				id: 3,
+				username: 'liz',
+				email: 'liz@example.com',
+				active: false
+			}
+		]
 	};
 
-	object.b = 3;
+	// reducer에서 Immer 사용하는 방법 알아보기;   
+	// 이때, Immer를 사용한다 해서 모든 업데이트가 간단해 지는 것은 아니다. 오히려 코드가 길어지는 업데이트도 있다
+	function reducer(state, action) {
+		switch (action.type) {
+			case 'CREATE_USER':
+				return {
+					users: state.users.concat(action.user)   // 예를 들어, users 배열은 객체의 깊은 곳에 위치하지 ㅇ낳기 때문에 새 항목을 추가하거나 제거할 때는 Immer를 사용하는 것보다 그냥 concat이나 filter를 사용하는 것이 코드가 짧고 편하다 
+					// 하지만, 우리는 사용법을 배워보기 위하여 해당 업데이트도 이번 강좌에서 Immer를 사용하여 처리해 주겠다.
+				};
+			case 'TOGGLE_USER':
+				return {
+					...state,
+					users: state.users.map(user =>
+						user.id === action.id ? { ...user, active: !user.active } : user
+					)
+				};
+			case 'REMOVE_USER':
+				return {
+					...state,
+					users: state.users.filter(user => user.id !== action.id)
+				};
+			default:
+				return state;
+		}
+	}
+
+	// UserDispatch 라는 이름으로 내보내준다.
+	export const UserDispatch = React.createContext(null);
+
+	function App() {
+		const [{ username, email }, onChange, onReset] = useInputs({
+			username: '',
+			email: ''
+		});
+		const [state, dispatch] = useReducer(reducer, initialState);
+		const nextId = useRef(4);
+
+		const { users } = state;
+
+		const onCreate = useCallback(() => {
+			dispatch({
+				type: 'CREATE_USER',
+				user: {
+					id: nextId.current,
+					username,
+					email
+				}
+			});
+			onReset();
+			nextId.current += 1;
+		}, [username, email, onReset]);
+
+		const count = useMemo(() => countActiveUsers(users), [users]);
+		return (
+			<UserDispatch.Provider value={dispatch}>
+				<CreateUser
+					username={username}
+					email={email}
+					onChange={onChange}
+					onCreate={onCreate}
+				/>
+				<UserList users={users} />
+				<div>활성사용자 수 : {count}</div>
+			</UserDispatch.Provider>
+		);
+	}
+
+	export default App;
 ```
 
+[App.js]   -    Immer 사용 후    
 
-
-<br>
-<br>
-
-
-> 
-
-
-e.g.
 ```javascript
+	import React, { useRef, useReducer, useMemo, useCallback } from 'react';
+	import UserList from './UserList';
+	import CreateUser from './CreateUser';
+	import produce from 'immer';
+
+
+	function countActiveUsers(users) {
+		console.log('활성 사용자 수를 세는중...');
+		return users.filter(user => user.active).length;
+	}
+
+	const initialState = {
+		users: [
+			{
+				id: 1,
+				username: 'velopert',
+				email: 'public.velopert@gmail.com',
+				active: true
+			},
+			{
+				id: 2,
+				username: 'tester',
+				email: 'tester@example.com',
+				active: false
+			},
+			{
+				id: 3,
+				username: 'liz',
+				email: 'liz@example.com',
+				active: false
+			}
+		]
+	};
+
+	function reducer(state, action) {
+		switch (action.type) {
+			case 'CREATE_USER':
+				return produce(state, draft => {
+					draft.users.push(action.user);
+				});
+			case 'TOGGLE_USER':
+				return produce(state, draft => {
+					const user = draft.users.find(user => user.id === action.id);
+					user.active = !user.active;
+				});
+			case 'REMOVE_USER':
+				return produce(state, draft => {
+					const index = draft.users.findIndex(user => user.id === action.id);
+					draft.users.splice(index, 1);
+				});
+			default:
+				return state;
+		}
+	}
+
+	// UserDispatch 라는 이름으로 내보내준다.
+	export const UserDispatch = React.createContext(null);
+
+	function App() {
+		const [state, dispatch] = useReducer(reducer, initialState);
+
+		const { users } = state;
+
+		const count = useMemo(() => countActiveUsers(users), [users]);
+		return (
+			<UserDispatch.Provider value={dispatch}>
+				<CreateUser />
+				<UserList users={users} />
+				<div>활성사용자 수 : {count}</div>
+			</UserDispatch.Provider>
+		);
+	}
+
+	export default App;
 ```
-e.g.
-```javascript
-```
+- `TOGGLE_USER` 액션의 경우 확실히 Immer의 사용으로 코드가 깔끔해졌지만 나머지의 경우는 오히려 코드가 좀 복잡해졌다. 
 
-<div style="padding-left: px;">
-	<img src="" alt="" style="width: px;" />	
-</div>
+<br>   
 
-<div style="padding-left: px;">
-	<img src="" alt="" style="width: px;" />	
-</div>
-
-📌😉
+📌 그래서 앞으로는 상황에 따라 잘 선택해서 Immer를 사용하면 되곘다.😉
 
 <br>
-<br>
+
 ---
+
 <details>
 	<summary>CLICK ME!</summary>
 
@@ -133,67 +342,9 @@ e.g.
 	- https://estaid.dev/reasons-to-maintain-immutability-with-react/
 	- https://velog.io/@bedakim/%EB%B6%88%EB%B3%80%EC%84%B1
 	- https://estaid.dev/reasons-to-maintain-immutability-with-react/
-
+	- https://velog.io/@bedakim/%EB%B6%88%EB%B3%80%EC%84%B1 
 	
 </details>
+
 ---
-
-
-
-
-
-	///////
-
-
-	---
-date: 2021-06-13-Sunday
----
-
-# 
-
-
-
-
-<br>
-<br>
-
-
-> 
-
-
-e.g.
-```javascript
-```
-e.g.
-```javascript
-```
-
-<div style="padding-left: px;">
-	<img src="" alt="" style="width: px;" />	
-</div>
-
-<div style="padding-left: px;">
-	<img src="" alt="" style="width: px;" />	
-</div>
-
-📌😉
-
-<br>
-<br>
----
-<details>
-	<summary>CLICK ME!</summary>
-
-- cf. 
-	- https://react.vlpt.us/basic/20-useReducer.html
-	- https://xiubindev.tistory.com/99
-
-	
-</details>
----
-
-
-
-
-
 	
