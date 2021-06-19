@@ -200,6 +200,10 @@ e.g.
 	export default Counter;
 ```
 - 위와 같이 코드를 작성하고 이제 버튼을 누르면 'increase' 또는 'decrease'라는 문구가 나타날 것이다.   
+
+<br>
+
+> 상태 선언 및 업데이트 하기 
 - 이제 여기서 필요한 것은 상태를 업데이트 하는 건데, 결론적으로 상태를 업데이트 하기 위해서는 `this.setState`라는 함수를 사용해야 한다.   
 하지만 여기서 문제!!     
 `this`는 컴포넌트 인스턴스를 가르켜야 하는데, 현재 구현한 handleIncrease 와 handleDecrease에서 this를 조회하려고 `console.log(this);`를하면 컴포넌트 인스턴스를 가르키지 않고 `undefined`를 출력한다.    
@@ -274,8 +278,18 @@ e.g.
 		import React, { Component } from 'react';
 
 		class Counter extends Component {
-			state = {           // 이때, state는 무조건 객체여야한다 
-				counter: 0       // 초깃값 설정 
+			// 초깃값 설정 - constructor 사용 O
+			// constructor(props) {
+			// 	super(props);
+			// 	this.state = {
+			// 		counter: 0
+			// 	};
+			// }
+
+			// 초깃값 설정 - constructor 사용 X
+			// 단, 아래의 문법은 정식 자바스크립트 문법은 아니고 class-properties라고 해서 바벨을 통해 사용할 수 있는 문법이다.
+			state = {           // 이때, state는 무조건 객체형태여야 한다. (cf. 함수형 컴포넌트에서 useState를 사용할 땐, 그 값이 어떤 것이라도 상관없었지만 -- 배열, 문자열, 숫자 등 -- 클래스형 컴포넌트에서는 state가 꼭 객체형태여야만 한다는 말!)
+				counter: 0       
 			};
 			handleIncrease = () => {
 				this.setState({
@@ -303,77 +317,64 @@ e.g.
 		export default Counter;
 ```
 
-///
-
-
-
-이제 여기서 필요한 것은 `state`다. state는 컴포넌트 내부에서 바꿀 수/바뀔 수 있는 값을 의미한다.    
-함수형 컴포넌트에서는 useState를 사용했다면, 클래스형 컴포넌트에서는 state를 사용하는 거라 이해하면 쉽다.   
-
-<br>
-
->> 클래스형 컴포넌트에서 state 사용 방법 
-
-
-
-
-<br>
-
-> 상태 선언하기
-<!-- - 여기까지 잘 따라와서 카운터가 잘 렌더링 됐어도 기능이 구현되지 않았기 때문에 작동하지 않을 것이다.    
-여기서 카운터가 작동하기 위해서 (/상태가 변하게 하기 위해서) `state`가 필요하다.     -->
-<br>
-
-> 상태 업데이트하기
-
-<br>
+<!-- <br>
 
 > setState 의 함수형 업데이트
+- 우리가 이전에 배웠던 `useState`에서 함수형 업데이트를 할 수 있었던 것 처럼 `setState`도 마찬가지로 함수형 업데이트를 할 수 있다;    
 
-<br>
+e.g.    
 
-
-<br>
-<br>
-
-e.g. 
-[Counter.js]
-
-[Hello.js]
+[Counter.js]    
 
 ```javascript
-```
+	import React, { Component } from 'react';
 
-> 
+	class Counter extends Component {
+		state = {
+			counter: 0,
+			fixed: 1
+		};
+		handleIncrease = () => {
+			this.setState(state => ({
+				counter: state.counter + 1
+			}));
+		};
 
+		handleDecrease = () => {
+			this.setState(state => ({
+				counter: state.counter - 1
+			}));
+		};
 
-e.g.
-```javascript
-```
-e.g.
-```javascript
-```
+		render() {
+			return (
+				<div>
+					<h1>{this.state.counter}</h1>
+					<button onClick={this.handleIncrease}>+1</button>
+					<button onClick={this.handleDecrease}>-1</button>
+					<p>고정된 값: {this.state.fixed}</p>
+				</div>
+			);
+		}
+	}
 
-<div style="padding-left: px;">
-	<img src="" alt="" style="width: px;" />	
-</div>
-
-<div style="padding-left: px;">
-	<img src="" alt="" style="width: px;" />	
-</div>
-
-📌😉
+	export default Counter;
+``` -->
 
 <br>
 <br>
+
 ---
+
 <details>
 	<summary>CLICK ME!</summary>
 
 - cf. 
-	- https://react.vlpt.us/basic/20-useReducer.html
+	- https://react.vlpt.us/basic/24-class-component.html
 	- https://xiubindev.tistory.com/99
-
+	- https://velog.io/@choie0423/React-%ED%81%B4%EB%9E%98%EC%8A%A4%ED%98%95-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EC%97%90%EC%84%9C-state-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
+	- https://velog.io/@donggu/%EB%AC%B8%EA%B3%BC%EC%83%9D%EC%9D%B4-%EC%84%A4%EB%AA%85%ED%95%98%EB%8A%94-React-state-%ED%95%A8%EC%88%98%ED%98%95-%ED%81%B4%EB%9E%98%EC%8A%A4%ED%98%95-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%B9%84%EA%B5%90
 	
 </details>
+
 ---
