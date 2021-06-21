@@ -431,6 +431,7 @@ e.g.2.
 	- https://ko.reactjs.org/docs/react-component.html
 	- https://www.zerocho.com/category/React/post/579b5ec26958781500ed9955
 	- https://www.zerocho.com/category/React/post/5f9a6ef507be1d0004347305
+	- https://soldonii.tistory.com/113    (확인하기!)
 
 </details>
 
