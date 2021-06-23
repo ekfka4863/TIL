@@ -1,4 +1,7 @@
-$blue: #228be6; // 주석 선언
+$blue: #228be6; 
+$gray: #495057;
+$pink: #f06595;
+
 
 .Button {
   display: inline-flex;
@@ -9,17 +12,179 @@ $blue: #228be6; // 주석 선언
   border: none;
   cursor: pointer;
 
-  height: 2.25rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  font-size: 1rem;
+  // 사이즈(size) 관리 
+  &.large {
+    height: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1.25rem;
+  }
 
-  background: $blue; // 주석 사용
+  &.medium {
+    height: 2.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1rem;
+  }
+
+  &.small {
+    height: 1.75rem;
+    font-size: 0.875rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  // 색상(color) 관리 
+  &.blue {
+    background: $blue;
+
+    &:hover {
+      background: lighten($blue, 10%);
+    }
+
+    &:active {
+      background: darken($blue, 10%);
+    }
+  }
+  &.gray {
+    background: $gray;
+
+    &:hover {
+      background: lighten($gray, 10%);
+    }
+
+    &:active {
+      background: darken($gray, 10%);
+    }
+  }
+  &.pink {
+    background: $pink;
+
+    &:hover {
+      background: lighten($pink, 10%);
+    }
+
+    &:active {
+      background: darken($pink, 10%);
+    }
+  }
+
+  // background: $blue;
+  // &:hover {
+  //   background: lighten($blue, 10%); // 색상 10% 밝게
+  // }
+
+  // &:active {
+  //   background: darken($blue, 10%); // 색상 10% 어둡게
+  // }
+
+  // 버튼 여백 넣기 
+  & + & {
+    margin-left: 1rem;
+  }
+}
+
+
+
+// -------------------------------------- //
+// sass의 mixin 기능을 활용하여 반복되는 코드를 재사용 가능한 코드로 바꿔주자; 
+
+$blue: #228be6; 
+$gray: #495057;
+$pink: #f06595;
+
+// button-color라는 믹스인 생성! 
+@mixin button-color($color) {
+  background-color: $color;
+  
   &:hover {
-    background: lighten($blue, 10%); // 색상 10% 밝게
+    background: lighten($color, 10%);
   }
 
   &:active {
-    background: darken($blue, 10%); // 색상 10% 어둡게
+    background: darken($color, 10%);
   }
+
+  &.outline {           // outline 클래스가 있으면 테두리 만드는 scss 코드
+    color: $color;
+    background: none;
+    border: 1px solid $color;
+    
+    &:hover {
+      background: $color;
+      color: white;
+    }
+  }
+
 }
+
+
+.Button {
+  display: inline-flex;
+  color: white;
+  font-weight: bold;
+  outline: none;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+
+  // 사이즈(size) 관리 
+  &.large {
+    height: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1.25rem;
+  }
+
+  &.medium {
+    height: 2.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1rem;
+  }
+
+  &.small {
+    height: 1.75rem;
+    font-size: 0.875rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+
+
+  // 색상(color) 관리   -> mixin 사용! 
+  &.blue {
+    @include button-color($blue);
+  }
+
+  &.gray {
+    @include button-color($gray);
+  }
+
+  &.pink {
+    @include button-color($pink);
+  }
+
+
+  & + & {
+    margin-left: 1rem;
+  }
+
+  &.fullWidth {
+    width: 100%;
+    justify-content: center;
+    & + & {
+      margin-left: 0;
+      margin-top: 1rem;
+    }
+  }
+  
+}
+
+
+
+
+
+// -------------------------------------- //
+
+// -------------------------------------- //
