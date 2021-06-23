@@ -968,34 +968,147 @@ e.g.
 [components/Button.js]       
 
 ```javascript
+	import React from 'react';
+	import classNames from 'classnames';
+	import './Button.scss';
+
+	function Button({ children, size, color, outline, fullWidth, onClick, onMouseMove }) {
+		return (
+			<button
+				className={classNames('Button', size, color, { outline, fullWidth })}
+				onClick={onClick}
+				onMouseMove={onMouseMove}    // onMouseMove={onMouseMove} 이벤트 적용 
+			>
+				{children}
+			</button>
+		);
+	}
+
+	Button.defaultProps = {
+		size: 'medium',
+		color: 'blue'
+	};
+
+	export default Button;
 ```
+- 이때, 만약 필요한 이벤트가 있을 때마다 매번 이렇게 넣어주는건 번거로운 작업이다.    
+이러한 문제를 해결 해줄 수 있는 문법이 있는데, 바로 [spread와 rest](https://learnjs.vlpt.us/useful/07-spread-and-rest.html)이다.    
+- Button 컴포넌트를 다음과 같이 수정하자;    
 
-
-
-
-
-<br>
-<br>
-
-e.g.      
-
-[]     
+[components/Button.js]      
 
 ```javascript
+import React from 'react';
+import classNames from 'classnames';
+import './Button.scss';
+
+function Button({ 
+	children, 
+	size, 
+	color, 
+	outline, 
+	fullWidth, 
+	...rest 
+}) {
+	return (
+		<button
+			className={classNames('Button', size, color, { 
+				outline, 
+				fullWidth 
+			})}
+			{...rest}   // children, size, color, outline, fullWidth 빼고 나머지가 여기에 들어와서 <button></button>에 전달되는 것!
+		>
+			{children}
+		</button>
+	)
+}
+
+Button.defaultProps = {
+  size: 'medium',
+  color: 'blue'
+};
+
+export default Button;
 ```
-e.g.
+- 이렇게 `...rest`를 사용해서 이미 앞에서 지정한 props를 제외한 나머지 값들을 `rest`라는 **객체**에 모아주고, \<button> 태그에 `{...rest}`를 넣어주면, `rest` 안에 있는 값들을 모두 \<button> 태그에 설정/전달 할 수 있는 것이다.    
+그래서 만약, App.js 에서 사용한 가장 첫번째 버튼에 `onClick`을 설정해준다면...    
+
+[App.js]     
+
 ```javascript
+	import React from 'react';
+	import './App.scss';
+	import Button from './components/Button';
+
+	function App() {
+		return (
+			<div className="App">
+				<div className="buttons">
+					<Button size="large" onClick={() => console.log('클릭됐다!')}>
+						BUTTON
+					</Button>
+					<Button>BUTTON</Button>
+					<Button size="small">BUTTON</Button>
+				</div>
+				<div className="buttons">
+					<Button size="large" color="gray">
+						BUTTON
+					</Button>
+					<Button color="gray">BUTTON</Button>
+					<Button size="small" color="gray">
+						BUTTON
+					</Button>
+				</div>
+				<div className="buttons">
+					<Button size="large" color="pink">
+						BUTTON
+					</Button>
+					<Button color="pink">BUTTON</Button>
+					<Button size="small" color="pink">
+						BUTTON
+					</Button>
+				</div>
+				<div className="buttons">
+					<Button size="large" color="blue" outline>
+						BUTTON
+					</Button>
+					<Button color="gray" outline>
+						BUTTON
+					</Button>
+					<Button size="small" color="pink" outline>
+						BUTTON
+					</Button>
+				</div>
+				<div className="buttons">
+					<Button size="large" fullWidth>
+						BUTTON
+					</Button>
+					<Button size="large" color="gray" fullWidth>
+						BUTTON
+					</Button>
+					<Button size="large" color="pink" fullWidth>
+						BUTTON
+					</Button>
+				</div>
+			</div>
+		);
+	}
+
+	export default App;
 ```
+- 만약 첫 번째 버튼을 클릭했을 때 onClick 함수가 잘 호출 되었다면 콘솔창에는 '클릭됐다!' 라고 출력돼야 한다;     
 
-```scss
-```
-
-
-<div style="padding-left: px;">
-	<img src="" alt="" style="width: px;" />	
+<div style="padding-left: 40px;">
+	<img src="./images/리액트컴포넌트스타일링하기scss_8.png" alt="리액트컴포넌트스타일링하기scss_8" style="width: 300px;" />	
 </div>
 
-📌😉
+- 정리:    
+	- 그래서 위와 같이 컴포넌트가 어떤 props 를 받을 지 확실치는 않지만 그대로 다른 컴포넌트 또는 HTML 태그에 전달을 해주어야 하는 상황에는 이렇게 `...rest` 문법을 활용하면 된다! 
+
+<br>
+
+📌 이번 시간에는 **Sass**를 활용하는 방법에 대해서 알아보았다.    
+다음 시간에는 CSS Module을 활용하여 리액트 컴포넌트를 스타일링하는 방법을 알아보겠다!! 😉
 
 <br>
 <br>
