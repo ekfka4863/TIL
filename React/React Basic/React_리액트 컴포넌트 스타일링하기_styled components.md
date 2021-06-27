@@ -1,11 +1,10 @@
 ---
-date: 2021-06-24-Thursday
+date: 2021-06-24-Thursday, 2021-06-27-Sunday
 ---
 
 # 리액트 컴포넌트 스타일링하기
 
 <br>
-
 
 ## 3. styled-components
 - 이번에 배워볼 기술은 CSS in JS 라는 기술이다.    
@@ -128,6 +127,7 @@ e.g.
 만약 이해가 잘 안된다면 이 문법의 동작 원리를 정확하게 이해할 필요는 없다. 다만, 이런 문법이 있고, styled-components에서 이런 문법을 활용한다고 알고있으면 되겠다.    
 
 <br>
+<br>
 
 > styled-components 사용하기
 - 그럼 이제 본격적으로 `styled-components`를 본격적으로 사용해보자.     
@@ -231,6 +231,7 @@ e.g.
 - 위의 코드에서와 같이 여러 줄의 CSS 코드를 조건부로 보여주고 싶다면 `css`  사용해야한다. `css`를 불러와서 사용을 해야 그 스타일 내부에서도 다른 props 를 조회 할 수 있다.
 
 <br>
+<br>
 
 > Button 만들기
 - 재사용성이 높은 Button 컴포넌트를 styled-components로 구현해보자.    
@@ -282,8 +283,649 @@ e.g.
 	export default Button;
 ```
 
+- 버튼이 잘 나타났으면 성공;         
+<div style="padding-left: 40px;">
+	<img src="./images/styled components 예시 4.png" alt="styled components 예시 4" style="width: 300px;" />	
+</div> 
+
+<br>
+<br>
+
+> polished의 스타일 관련 유틸 함수 사용하기
+- Sass를 사용할 때는 `lighten()` 또는 `darken()`과 같은 **유틸 함수**를 사용하여 색상에 변화를 줄 수 있었는데, `CSS in JS`에서도 비슷한 유틸 함수를 사용하고 싶다면 `polished`라는 라이브러리를 사용하면 된다.    
+우선, 패키지를 설치를 해준다;
+```xml 
+	$ yarn add polished
+```
+- 그리고 기존에 색상 부분은 polished의 유틸 함수들로 대체해 보겠다;     
+
+[Button.js]      
+
+```javascript
+	import React from 'react';
+	import styled from 'styled-components';
+	import { darken, lighten } from 'polished';
+
+	const StyledButton = styled.button`
+		/* 공통 스타일 */
+		display: inline-flex;
+		outline: none;
+		border: none;
+		border-radius: 4px;
+		color: white;
+		font-weight: bold;
+		cursor: pointer;
+		padding-left: 1rem;
+		padding-right: 1rem;
+
+		/* 크기 */
+		height: 2.25rem;
+		font-size: 1rem;
+
+		/* 색상 */
+		background: #228be6;
+		&:hover {
+			background: ${lighten(0.1, '#228be6')};
+		}
+		&:active {
+			background: ${darken(0.1, '#228be6')};
+		}
+
+		/* 기타 */
+		& + & {
+			margin-left: 1rem;
+		}
+	`; 
+
+	function Button({ children, ...rest }) {
+		return <StyledButton {...rest}>{children}</StyledButton>;
+	}
+
+	Button.defaultProps = {
+		color: 'blue'
+	};
+
+	export default Button;
+```
+- 버튼이 커서를 올렸을 때 색상이 바뀌고 있다면 정상!     
+이제, 회색, 핑크색 버튼들을 만들어 볼 것!    
+색상 코드를 지닌 변수를 Button.js에서 선언을 하는 대신에 styled-components의 [ThemeProvider](https://www.styled-components.com/docs/api#themeprovider) 라는 기능을 사용하여 styled-components 로 만드는 모든 컴포넌트에서 조회하여 사용 할 수 있는 전역적인 값을 설정해보겠다.      
+- App.js를 아래와 같이 수정;    
+e.g.      
+
+[App.js]      
+
+```javascript
+	import React from 'react';
+	import styled, { ThemeProvider } from 'styled-components';   // ThemeProvider 사용!
+	import Button from './components/Button';
+
+	// AppBlock 컴포넌트를 바로 선언 및 스타일링을 동시에! 
+	const AppBlock = styled.div`
+		width: 512px;
+		margin: 0 auto;
+		margin-top: 4rem;
+		border: 1px solid black;
+		padding: 1rem;
+	`
+
+	function App() {
+		return(
+			{/* ThemeProvider을 사용해서 theme을 설정하면
+			ThemeProvider 내부에 렌더링된 styled-components 로 만든 컴포넌트에서 palette 를 조회하여 사용 할 수 있다. */}
+			<ThemeProvider
+				theme = {{
+					palette: {
+						blue: '#228be6',
+						gray: '#495057',
+						pink: '#f06595'
+					}
+				}}
+			>
+				<AppBlock>
+					<Button>BUTTON</Button>
+				</AppBlock>
+			</ThemeProvider>
+		)
+	}
+
+	export default App;
+```
+- <u>`ThemeProvider`을 사용해서 `theme`을 설정하면 ThemeProvider 내부에 렌더링된 styled-components 로 만든 컴포넌트에서 `palette`를 조회하여 사용 할 수 있다</u>.     
+OR...     
+App 컴포넌트에서 <u>`ThemeProvider`로 설정한 값은 `styled-components`에서 `props.theme`로 조회할 수 있다</u>.       
+지금은 `selected` 값을 무조건 blue 값을 가르키게 해놨는데 (cf. `const selected = props.theme.palette.blue;`), 이 부분을 Button 컴포넌트가 `color`props를 통하여 받아오게 될 색상(cf. 회색, 핑크색)을 사용하도록 수정해 보겠다;             
+e.g.       
+
+[Button.js]        
+
+```javascript
+	import React from 'react';
+	import styled, { css } from 'styled-components';
+	import { darken, lighten } from 'polished';
+
+	const StyledButton = styled.button`
+		/* 공통 스타일 */
+		display: inline-flex;
+		outline: none;
+		border: none;
+		border-radius: 4px;
+		color: white;
+		font-weight: bold;
+		cursor: pointer;
+		padding-left: 1rem;
+		padding-right: 1rem;
+
+		/* 크기 */
+		height: 2.25rem;
+		font-size: 1rem;
+
+		/* 색상 -> props.color로 "어떤 색상이 오냐에 따라 색상을 분리해서" 호버와 액티브 시 lighten과 darken "유틸 함수를 적용"시킬 수 있게 된다. */
+		${props => {
+			const selected = props.theme.palette[props.color];
+			return css`
+				background: ${selected};
+				&:hover {
+					background: ${lighten(0.1, selected)};
+				}
+				&:active {
+					background: ${darken(0.1, selected)};
+				}
+			`;
+		}}
+
+		/* 기타 */
+		& + & {
+			margin-left: 1rem;
+		}
+	`;
+
+	function Button({ children, ...rest }) {
+		return <StyledButton {...rest}>{children}</StyledButton>;
+	}
+
+	export default Button;
+```
+-이제, App 컴포넌트를 열어서 회색, 핑크색 버튼을 렌더링 해보자;     
+
+[App.js]       
+
+```javascript
+	import React from 'react';
+	import styled, { ThemeProvider } from 'styled-components';
+	import Button from './components/Button';
+
+	const AppBlock = styled.div`
+		width: 512px;
+		margin: 0 auto;
+		margin-top: 4rem;
+		border: 1px solid black;
+		padding: 1rem;
+	`;
+
+	function App() {
+		return (
+			<ThemeProvider
+				theme={{
+					palette: {
+						blue: '#228be6',
+						gray: '#495057',
+						pink: '#f06595'
+					}
+				}}
+			>
+				<AppBlock>
+					<Button>BUTTON</Button>
+					<Button color="gray">BUTTON</Button>
+					<Button color="pink">BUTTON</Button>
+				</AppBlock>
+			</ThemeProvider>
+		);
+	}
+
+	export default App;
+```
+- 버튼이 파란색, 회색, 분홍색. 이렇게 세 개가 만들어 졌으면 성공;     
+<div style="padding-left: 40px;">
+	<img src="./images/styled components 예시 5.png" alt="styled components 예시 5" style="width: 300px;" />	
+</div> 
+
+- 위의 Button 컴포넌트 코드 아래와 같이 리팩토링이 가능하다;      
+
+[components/Button.js]        
+
+```javascript
+	import React from 'react';
+	import styled, {css} from 'styled-components';   
+	import {darken, lighten} from 'polished';
+
+	const StyledButton = styled.button`
+		/* 공통 스타일 */
+		display: inline-flex;
+		outline: none;
+		border: none;
+		border-radius: 4px;
+		color: white;
+		font-weight: bold;
+		cursor: pointer;
+		padding-left: 1rem;
+		padding-right: 1rem;
+
+		/* 크기 */
+		height: 2.25rem;
+		font-size: 1rem;
+
+		/* 색상 -> 비구조할당 문법 */
+		${({ theme, color }) => {
+			const selected = theme.palette[color];
+			return css`
+				background: ${selected};
+					&:hover {
+						background: ${lighten(0.1, selected)};
+					}
+					&:active {
+						background: ${darken(0.1, selected)};
+					}
+				`;
+		}}
+
+		/* 기타 */
+		& + & {
+			margin-left: 1rem;
+		}
+	`;
+
+	function Button({ children, color, ...rest }) {   //  children, color, ...rest -> props로 받아오기! 
+		return <StyledButton color={color} {...rest}>{children}</StyledButton>;
+	}
+
+	Button.defaultProps = {
+		color: 'blue'
+	};
+
+	export default Button;
+```  
+- **비구조화 할당 문법**을 사용하여 가독성을 높여주었다.     
+참고로 위 로직은 다음과 같이 색상에 관련된 코드를 분리하여 사용 할 수도 있다;       
+
+[Button.js]        
+
+```javascript
+	import React from 'react';
+	import styled, { css } from 'styled-components';
+	import { darken, lighten } from 'polished';
+
+	const colorStyles = css`
+		${({ theme, color }) => {
+			const selected = theme.palette[color];
+			return css`
+				background: ${selected};
+				&:hover {
+					background: ${lighten(0.1, selected)};
+				}
+				&:active {
+					background: ${darken(0.1, selected)};
+				}
+			`;
+		}}
+	`;
+
+	const StyledButton = styled.button`
+		/* 공통 스타일 */
+		display: inline-flex;
+		outline: none;
+		border: none;
+		border-radius: 4px;
+		color: white;
+		font-weight: bold;
+		cursor: pointer;
+		padding-left: 1rem;
+		padding-right: 1rem;
+
+		/* 크기 */
+		height: 2.25rem;
+		font-size: 1rem;
+
+		/* 색상 */
+		${colorStyles}
+
+		/* 기타 */
+		& + & {
+			margin-left: 1rem;
+		}
+	`;
+
+	function Button({ children, color, ...rest }) {
+		return <StyledButton color={color} {...rest}>{children}</StyledButton>;
+	}
+
+	Button.defaultProps = {
+		color: 'blue'
+	};
+
+	export default Button;
+```
+
+<br>
+<br>
 
 
+<!--  여기부터 다시! --> 
+
+> Button 컴포넌트 사이즈 조정하기
+- 이제, `size` props 를 설정하여 버튼의 크기도 다양하게 만들어보겠다;      
+
+[components/Button.js]        
+
+```javascript
+	import React from 'react';
+	import styled, { css } from 'styled-components';
+	import { darken, lighten } from 'polished';
+
+	const colorStyles = css`
+		${({ theme, color }) => {
+			const selected = theme.palette[color];
+			return css`
+				background: ${selected};
+				&:hover {
+					background: ${lighten(0.1, selected)};
+				}
+				&:active {
+					background: ${darken(0.1, selected)};
+				}
+			`;
+		}}
+	`;
+
+	const sizeStyles = css`
+		${props =>
+			props.size === 'large' &&  // props.size가 large일 때... 
+			css`
+				height: 3rem;
+				font-size: 1.25rem;
+			`}
+
+		${props =>
+			props.size === 'medium' &&
+			css`
+				height: 2.25rem;
+				font-size: 1rem;
+			`}
+
+			${props =>
+				props.size === 'small' &&
+				css`
+					height: 1.75rem;
+					font-size: 0.875rem;
+				`}
+	`;
+
+	const StyledButton = styled.button`
+		/* 공통 스타일 */
+		display: inline-flex;
+		outline: none;
+		border: none;
+		border-radius: 4px;
+		color: white;
+		font-weight: bold;
+		cursor: pointer;
+		padding-left: 1rem;
+		padding-right: 1rem;
+
+		/* 크기 */
+		${sizeStyles}    
+
+		/* 색상 */
+		${colorStyles}
+
+		/* 기타 */
+		& + & {
+			margin-left: 1rem;
+		}
+	`;
+
+	function Button({ children, color, size,  ...rest }) {      // props로 size를 받아오게 한다
+		return (
+			<StyledButton color={color} size={size} {...rest}>
+				{children}
+			</StyledButton>
+		);
+	}
+
+	Button.defaultProps = {
+		color: 'blue',
+		size: 'medium'  // 사이즈의 기본값을 미디움으로 설정
+	};
+
+	export default Button;
+```
+- 참고로 `sizeStyles`에 해당하는 코드를 따로 분리하지 않고 StyledButton의 스타일 내부에 바로 적어도 상관은 없지만, 이렇게 분리해두면 나중에 유지보수를 할 때 더 편해질 수 있다.    
+- 이제 사이즈가 커스터마이징된 버튼들을 렌더링해보자;       
+
+[App.js]       
+
+```javascript
+	import React from 'react';
+	import styled, { ThemeProvider } from 'styled-components';
+	import Button from './components/Button';
+
+	const AppBlock = styled.div`
+		width: 512px;
+		margin: 0 auto;
+		margin-top: 4rem;
+		border: 1px solid black;
+		padding: 1rem;
+	`;
+
+	// 새로운 컴포넌트 만들기 -> ButtonGroup
+	// 해석: ButtonGroup이 나란이 있으면 margin-top으로 1rem을 줄 것!
+	cont ButtonGroup = styled.div`
+		& + & {       
+			margin-top: 1rem;
+		}
+	`;
+
+	function App() {
+		return (
+			<ThemeProvider
+				theme={{
+					palette: {
+						blue: '#228be6',
+						gray: '#495057',
+						pink: '#f06595'
+					}
+				}}
+			>
+				<AppBlock>
+					<ButtonGroup>
+						<Button size="large">BUTTON</Button>
+						<Button>BUTTON</Button>
+						<Button size="small">BUTTON</Button>
+					</ButtonGroup>
+				</AppBlock>
+			</ThemeProvider>
+		);
+	}
+
+	export default App;
+```
+- 아래와 같이 파랑, 회색, 분홍색을 지닌 버튼들이 사이즈 별로 나타났으면 성공;      
+<div style="padding-left: 40px;">
+	<img src="./images/styled components 예시 6.png" alt="styled components 예시 6" style="width: 300px;" />	
+</div>
+
+- 위의 코드를 리팩토링 한다면;      
+
+[App.js]       
+
+```javascript
+	import React from 'react';
+	import styled, { css } from 'styled-components';
+	import { darken, lighten } from 'polished';
+
+	const colorStyles = css`
+		${({ theme, color }) => {
+			const selected = theme.palette[color];
+			return css`
+				background: ${selected};
+				&:hover {
+					background: ${lighten(0.1, selected)};
+				}
+				&:active {
+					background: ${darken(0.1, selected)};
+				}
+			`;
+		}}
+	`;
+
+	const sizes = {
+		large: {
+			height: '3rem',
+			fontSize: '1.25rem'
+		},
+		medium: {
+			height: '2.25rem',
+			fontSize: '1rem'
+		},
+		small: {
+			height: '1.75rem',
+			fontSize: '0.875rem'
+		}
+	};
+
+	const sizeStyles = css`
+		${({ size }) => css`
+			height: ${sizes[size].height};
+			font-size: ${sizes[size].fontSize};
+		`}
+	`;
+
+	const StyledButton = styled.button`
+		/* 공통 스타일 */
+		display: inline-flex;
+		outline: none;
+		border: none;
+		border-radius: 4px;
+		color: white;
+		font-weight: bold;
+		cursor: pointer;
+		padding-left: 1rem;
+		padding-right: 1rem;
+
+		/* 크기 */
+		${sizeStyles}
+
+		/* 색상 */
+		${colorStyles}
+
+		/* 기타 */
+		& + & {
+			margin-left: 1rem;
+		}
+	`;
+
+	function Button({ children, color, size, ...rest }) {
+		return (
+			<StyledButton color={color} size={size} {...rest}>
+				{children}
+			</StyledButton>
+		);
+	}
+
+	Button.defaultProps = {
+		color: 'blue',
+		size: 'medium'
+	};
+
+	export default Button;
+```
+- 여기까지 했다면 그 다음에는 Button 컴포넌트에 `outline`이라는 props를 설정하여 이 값이 `true`일 때는 테두리만 지닌 버튼을 보여주도록 설정해보겠다. 이 작업을 할 때에는 `colorStyles`만 수정해주면 된다;      
+
+[components/Button.js]         
+
+<!--  여기부터!! -->
+```javascript
+	import React from 'react';
+	import styled, { css } from 'styled-components';
+	import { darken, lighten } from 'polished';
+
+	const colorStyles = css`
+		${({ theme, color }) => {
+			const selected = theme.palette[color];
+			return css`
+				background: ${selected};
+				&:hover {
+					background: ${lighten(0.1, selected)};
+				}
+				&:active {
+					background: ${darken(0.1, selected)};
+				}
+			`;
+		}}
+	`;
+
+	const sizeStyles = css`
+		${props =>
+			props.size === 'large' &&  // props.size가 large일 때... 
+			css`
+				height: 3rem;
+				font-size: 1.25rem;
+			`}
+
+		${props =>
+			props.size === 'medium' &&
+			css`
+				height: 2.25rem;
+				font-size: 1rem;
+			`}
+
+			${props =>
+				props.size === 'small' &&
+				css`
+					height: 1.75rem;
+					font-size: 0.875rem;
+				`}
+	`;
+
+	const StyledButton = styled.button`
+		/* 공통 스타일 */
+		display: inline-flex;
+		outline: none;
+		border: none;
+		border-radius: 4px;
+		color: white;
+		font-weight: bold;
+		cursor: pointer;
+		padding-left: 1rem;
+		padding-right: 1rem;
+
+		/* 크기 */
+		${sizeStyles}    
+
+		/* 색상 */
+		${colorStyles}
+
+		/* 기타 */
+		& + & {
+			margin-left: 1rem;
+		}
+	`;
+
+	function Button({ children, color, size,  ...rest }) {      // props로 size를 받아오게 한다
+		return (
+			<StyledButton color={color} size={size} {...rest}>
+				{children}
+			</StyledButton>
+		);
+	}
+
+	Button.defaultProps = {
+		color: 'blue',
+		size: 'medium'  // 사이즈의 기본값을 미디움으로 설정
+	};
+
+	export default Button;
+```
 
 
 
@@ -297,10 +939,6 @@ e.g.
 e.g.
 ```scss
 ```
-<br>
-
-> polished의 스타일 관련 유틸 함수 사용하기
-
 
 <br>
 
